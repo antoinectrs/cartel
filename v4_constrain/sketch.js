@@ -7,9 +7,9 @@ let PARAMS = {
     spacing: 50,
   },
   word: [
-    "yes",
-    "no",
-    "inteligence"
+    // "yes",
+    // "no",
+    "ab"
   ]
 }
 function preload() {
@@ -72,7 +72,8 @@ function setup() {
         var options2 = {
           bodyA: textChain[i][index].body,
           bodyB: textChain[i][index - 1].body,
-          stiffness: 0.1,
+          stiffness: 0.9,
+          friction:0.2,
           length: 60,
         };
         let constraint = Constraint.create(options2);
@@ -115,14 +116,22 @@ function draw() {
   stiffness: PARAMS.remap,
     background(255);
 
-  Engine.update(engine);
+  // Engine.update(engine);
   for (let i = 0; i < textChain.length; i++) {
     for (var index = 0; index < textChain[i].length; index++) {
       textChain[i][index].show();
+
     }
   }
+  let radsToDegs =  round(textChain[0][0].body.angle * 180 / Math.PI);
+  if(radsToDegs%360==0){
+    // console.log("turn");
+  }
+  // console.log( radsToDegs);
+  const mouseMap = round(map(mouseX, 0, window.height, 0, 10));
+  // console.log(mouseMap)
   //ROTATE GRAVITY
-  if (frameCount % 10 == 0) {
+  if (frameCount % mouseMap == 0) {
     grav += theta;
     if (grav > TWO_PI) {
       grav -= TWO_PI;
@@ -133,4 +142,7 @@ function draw() {
 
 
   rectMode(CENTER);
+}
+function mouseClicked(){
+  Matter.Body.rotate(textChain[0][0].body, 10)
 }
