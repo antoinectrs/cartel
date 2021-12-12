@@ -1,12 +1,10 @@
 function LetterTemplate(path) {
   var pointsAsString = "";
-
   // for (var j = 0; j < path.length; j++) {
   //   pointsAsString += path[j].x * 8 + " ";
   //   pointsAsString += path[j].y * 8 + " ";
   // }
   // this.vertices = Vertices.fromPath(pointsAsString);
-
   this.points = path;
   this.options = {
     friction: 0,

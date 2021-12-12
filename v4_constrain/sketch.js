@@ -1,20 +1,29 @@
 let Engine, Composite, World, Vertices, Body, Bodies, Constraint;
-Constraint = Matter.Constraint;
-let font;
+
+var textChain = [];
+let PARAMS = {
+  fontFam: null,
+  font: {
+    spacing: 50,
+  },
+  word: [
+    ["y", "e", "s"],
+    ["n", "o"],
+    // ["o", "k"]
+  ]
+}
 function preload() {
   Engine = Matter.Engine,
     Composite = Matter.Composite,
     World = Matter.World,
     Vertices = Matter.Vertices,
     Bodies = Matter.Bodies,
-    Body = Matter.Body;
-  font = loadFont('assets/goudy.otf');
+    Body = Matter.Body,
+    Constraint = Matter.Constraint;
+
+  PARAMS.fontFam = loadFont('assets/goudy.otf');
 }
-let PARAMS = {
-  font: {
-    spacing: 50,
-  }
-}
+
 let bounds;
 let engine;
 let world;
@@ -41,7 +50,7 @@ function setup() {
   createCanvas(myWidth, myHeight);
 
   // Set text characteristics
-  textFont(font);
+  textFont(PARAMS.fontFam);
   textSize(35);
   textAlign(CENTER, CENTER);
 
@@ -61,11 +70,27 @@ function setup() {
   // let  constraint = Constraint.create(options);
   const sendLetter = [];
   // create letter templates
-  for (var i = 0; i < textSplit.length; i++) {
-    if (textSplit[i] != " ") {
-      
-      sendLetter.push(textSplit[i].toLowerCase());
-      // console.log(textSplit[i]);
+  // for (var i = 0; i < textSplit.length; i++) {
+  //   if (textSplit[i] != " ") {
+  //     sendLetter.push(textSplit[i].toLowerCase());
+  //   }
+  // }
+
+  let prev = null;
+  for (let i = 0; i < PARAMS.word.length; i++) {
+    textChain.push([]);
+    for (let index = 0; index < PARAMS.word[i].length; index++) {
+       textChain[i].push(new TextChain(width / 2 + 10 * index, height / 2 - index * 10, 50, 50, PARAMS.word[i][index]));
+       if ( textChain[i][index] !=  textChain[i][0]) {
+        var options2 = {
+          bodyA:  textChain[i][index].body,
+          bodyB:  textChain[i][index - 1].body,
+          stiffness: 0.1,
+          length: 60,
+        };
+        let constraint = Constraint.create(options2);
+        World.add(world, constraint);
+      }
     }
   }
   // create ground
@@ -82,10 +107,10 @@ function setup() {
   grav = HALF_PI;
   theta = QUARTER_PI * 0.125;
 
-  for (let i = 0; i < sendLetter.length; i++) {
-    const spacing = PARAMS.font.spacing * i;
-    setText(sendLetter[i], spacing);
-  }
+  // for (let i = 0; i < sendLetter.length; i++) {
+  //   const spacing = PARAMS.font.spacing * i;
+  //   setText(sendLetter[i], spacing);
+  // }
 }
 
 function bodiesUpdate() {
@@ -94,42 +119,30 @@ function bodiesUpdate() {
     bodies.splice(0, 1);
   }
 }
-
-var prevMouseX;
-var prevMouseY;
-/*
-function mouseClicked() {
-}
-*/
-function mousePressed(event) {
-  prevMouseX = event.x;
-  prevMouseY = event.y;
-}
-
-function mouseDragged() {
-  //return mouseClicked();
-  return false;
-}
-
 function setText(letter, spacing) {
   var newBody;
-  // if (keyCode in letterToKeyMap) {
-  // console.log(letterToKeyMap[keyCode]);
   newBody = new Letter(world, spacing + 100, 100, letter);
   if (newBody.body) {
     bodies.push(newBody);
     bodiesUpdate();
   }
-  // }
   return false;
 }
 
 function draw() {
+  stiffness: PARAMS.remap,
   background(255);
 
-  for (var i = 0; i < bodies.length; i++) {
-    bodies[i].show();
+  Engine.update(engine);  
+  for (let i = 0; i < textChain.length; i++) {  
+    for (var index = 0; index <  textChain[i].length; index++) {
+      textChain[i][index].show();
+    }
   }
+ 
+  // for (var i = 0; i < bodies.length; i++) {
+  //   bodies[i].show();
+  // }
 
   //ROTATE GRAVITY
   if (frameCount % 10 == 0) {
@@ -140,9 +153,7 @@ function draw() {
     engine.world.gravity.x = cos(grav);
     engine.world.gravity.y = sin(grav);
   }
-
   noStroke(255);
   fill(170);
   rectMode(CENTER);
-
 }
