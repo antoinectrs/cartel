@@ -7,9 +7,9 @@ let PARAMS = {
     spacing: 50,
   },
   word: [
-    ["y", "e", "s"],
-    ["n", "o"],
-    // ["o", "k"]
+    "yes",
+    "no",
+    "inteligence"
   ]
 }
 function preload() {
@@ -22,16 +22,16 @@ function preload() {
     Constraint = Matter.Constraint;
 
   PARAMS.fontFam = loadFont('assets/goudy.otf');
+  for (let index = 0; index < PARAMS.word.length; index++) {
+   PARAMS.word[index][0]=PARAMS.word[index][0].split('');
+  }
 }
 
 let bounds;
 let engine;
 let world;
 let ground, ground2;
-// var lut = "abcdefghijklmnopqrstuvwxyz";
-var lut = "no";
-// var lut = "Carte blanche à celles et ceux qui prennent soin de nous. Avec la complicité de l’artiste Frantiček Klossner, des étudiantes et des étudiants en Soins infirmiers donnent libre cours à leur créativité pour exprimer leurs expériences, émotions, espoirs et préoccupations. Leurs installations artistiques invitent à nous interroger sur les enjeux liés à la santé et aux soins aujourd’hui. Avec beaucoup d’authenticité, ces témoignages esthétiques rendent visible un engagement infirmier essentiel dans le contexte actuel.";
-const textSplit = lut.split("");
+
 
 var letterTemplates = {};
 var bodies = [];
@@ -77,14 +77,15 @@ function setup() {
   // }
 
   let prev = null;
+
   for (let i = 0; i < PARAMS.word.length; i++) {
     textChain.push([]);
     for (let index = 0; index < PARAMS.word[i].length; index++) {
-       textChain[i].push(new TextChain(width / 2 + 10 * index, height / 2 - index * 10, 50, 50, PARAMS.word[i][index]));
-       if ( textChain[i][index] !=  textChain[i][0]) {
+      textChain[i].push(new TextChain(width / 2 + 10 * index, height / 2 - index * 10, 50, 50, PARAMS.word[i][index]));
+      if (textChain[i][index] != textChain[i][0]) {
         var options2 = {
-          bodyA:  textChain[i][index].body,
-          bodyB:  textChain[i][index - 1].body,
+          bodyA: textChain[i][index].body,
+          bodyB: textChain[i][index - 1].body,
           stiffness: 0.1,
           length: 60,
         };
@@ -131,15 +132,15 @@ function setText(letter, spacing) {
 
 function draw() {
   stiffness: PARAMS.remap,
-  background(255);
+    background(255);
 
-  Engine.update(engine);  
-  for (let i = 0; i < textChain.length; i++) {  
-    for (var index = 0; index <  textChain[i].length; index++) {
+  Engine.update(engine);
+  for (let i = 0; i < textChain.length; i++) {
+    for (var index = 0; index < textChain[i].length; index++) {
       textChain[i][index].show();
     }
   }
- 
+
   // for (var i = 0; i < bodies.length; i++) {
   //   bodies[i].show();
   // }
