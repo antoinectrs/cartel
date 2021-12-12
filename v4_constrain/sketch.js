@@ -51,30 +51,16 @@ function setup() {
 
   // Set text characteristics
   textFont(PARAMS.fontFam);
-  textSize(35);
+  textSize(40);
   textAlign(CENTER, CENTER);
 
   frameRate(fps);
-  // ccapture_ctx = new Ccapture_context(fps);
   done = false;
-
-  // let options = {
-  //   bodyA : newBody[0].body,
-  //   bodyB : newBody[1].body,
-  //   length:50,
-  //   stiffness:0.4
-  // }
 
   engine = Engine.create();
   world = engine.world;
   // let  constraint = Constraint.create(options);
   const sendLetter = [];
-  // create letter templates
-  // for (var i = 0; i < textSplit.length; i++) {
-  //   if (textSplit[i] != " ") {
-  //     sendLetter.push(textSplit[i].toLowerCase());
-  //   }
-  // }
 
   let prev = null;
 
@@ -107,11 +93,6 @@ function setup() {
   Engine.run(engine);
   grav = HALF_PI;
   theta = QUARTER_PI * 0.125;
-
-  // for (let i = 0; i < sendLetter.length; i++) {
-  //   const spacing = PARAMS.font.spacing * i;
-  //   setText(sendLetter[i], spacing);
-  // }
 }
 
 function bodiesUpdate() {
@@ -140,11 +121,6 @@ function draw() {
       textChain[i][index].show();
     }
   }
-
-  // for (var i = 0; i < bodies.length; i++) {
-  //   bodies[i].show();
-  // }
-
   //ROTATE GRAVITY
   if (frameCount % 10 == 0) {
     grav += theta;
@@ -154,7 +130,7 @@ function draw() {
     engine.world.gravity.x = cos(grav);
     engine.world.gravity.y = sin(grav);
   }
-  noStroke(255);
-  fill(170);
+
+
   rectMode(CENTER);
 }

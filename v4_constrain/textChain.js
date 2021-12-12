@@ -18,12 +18,12 @@ function TextChain(x, y, w, h,letter) {
       rectMode(CENTER);
       strokeWeight(1);
       stroke(0);
-  
+
+    
+
       rect(0, 0, this.w, this.h);
       fill(0);
-      textAlign(CENTER, CENTER);
-      textSize(20);
-      translate(-50, -50);
+      translate(-50, -60);
       text(letter, this.w, this.h)
       
       pop();

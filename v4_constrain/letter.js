@@ -15,7 +15,7 @@ function LetterTemplate(path) {
 
 function Letter(world, x, y, input) {
   // this.points = input.points;
-  // this.vertices = JSON.parse(JSON.stringify(input.vertices));
+
 
   //this.body = Bodies.fromVertices(x, y, this.vertices);
 
@@ -37,14 +37,14 @@ function Letter(world, x, y, input) {
     rotate(angle);
 
     stroke(0);
-    strokeWeight(1)
+    // strokeWeight(1)
     //noStroke();
     // fill(0);
     noFill();
 
     //ellipse(pos.x, pos.y, 30, 30);
-     rect(0,0, 50, 50);
-     noStroke();
+    rect(0, 0, 50, 50);
+    noStroke();
     fill(0);
     translate(0, -10);
     text(input, 0, 0);
