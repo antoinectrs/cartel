@@ -68,7 +68,6 @@ function setup() {
   grav = HALF_PI;
   theta = QUARTER_PI * 0.125;
 }
-
 function bodiesUpdate() {
   if (bodies.length > bodiesMaxLength) {
     Composite.remove(world, bodies[0].body);
@@ -147,8 +146,7 @@ function writeLetter(){
   let backLine=height/3;
   let line = width-width/2;
   for (let i = 0; i < PARAMS.word.length; i++) {
-    textChain.push([]);
-    
+    textChain.push([]);  
     // for (let index = 0; index < PARAMS.word[i].length; index++) {
       // textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
       if(i%10==0){
