@@ -44,7 +44,6 @@ function setup() {
   textFont(PARAMS.fontFam);
   textSize(40);
   textAlign(CENTER, CENTER);
-
   frameRate(fps);
 
   engine = Engine.create();
@@ -89,74 +88,98 @@ function draw() {
   drawKeypoints();
   // Engine.update(engine);
   textSize(40);
-  if( PARAMS.posnet.model){
+  if (PARAMS.posnet.model) {
     standardBloc();
     // introBloc(PARAMS.state.variableFont);
   }
   rectMode(CENTER);
 }
 function mouseClicked() {
-  PARAMS.state.intro= !PARAMS.state.intro
-  changeSizeIntro(headTypeChain,PARAMS.state.intro); 
+  PARAMS.state.intro = !PARAMS.state.intro
+  changeSizeIntro(headTypeChain, PARAMS.state.intro);
 }
 
-function standardBloc(){
-    for (let i = 0; i < textChain.length; i++) {
-      for (var index = 0; index < textChain[i].length; index++) {
-        textChain[i][index].show();
-      }
+function standardBloc() {
+  for (let i = 0; i < textChain.length; i++) {
+    for (var index = 0; index < textChain[i].length; index++) {
+      textChain[i][index].show();
+
+      // console.log(textChain[i][index].textWorld);
+    }
   }
 }
-function introBloc(variable){
+function introBloc(variable) {
   textSize(variable);
   headTypeChain.show();
 }
-function writeChaine(){
+function writeChaine() {
+  // for (let i = 0; i < PARAMS.word.length; i++) {
+  textChain.push([]);
+
+  for (let index = 0; index < PARAMS.word[0].length; index++) {
+    // textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
+    textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[0][index]));
+    if (textChain[0][index] != textChain[0][0]) {
+      // var options2 = {
+      //   bodyA: textChain[0][index].body,
+      //   bodyB: textChain[0][index - 1].body,
+      //   stiffness: 0.9,
+      //   friction: 0.2,
+      //   length: 60,
+      // };
+
+      // let constraint = Constraint.create(options2);
+      // World.add(world, constraint);
+      // textChain[0].setPhysics();
+    }
+
+
+  }
+  //
+  // headTypeChain = new TextChain(width/2, height-300, PARAMS.font.bodyBox, PARAMS.font.bodyBox,PARAMS.headType); 
+  // var options2 = {
+  //   bodyA: headTypeChain.body,
+  //   bodyB: headTypeChain.body,
+  //   stiffness: 0.9,
+  //   friction: 0.2,
+  //   length: 60,
+  // };
+  // let constraint = Constraint.create(options2);
+  // World.add(world, constraint);
+  // }
+}
+function writeLetter() {
+  let backLine = height / 3;
+  let line = width - width / 2;
   for (let i = 0; i < PARAMS.word.length; i++) {
     textChain.push([]);
-    for (let index = 0; index < PARAMS.word[i].length; index++) {
-      // textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
-      textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
-      if (textChain[i][index] != textChain[i][0]) {
-        var options2 = {
-          bodyA: textChain[i][index].body,
-          bodyB: textChain[i][index - 1].body,
-          stiffness: 0.9,
-          friction: 0.2,
-          length: 60,
-        };
-        let constraint = Constraint.create(options2);
-        World.add(world, constraint);
-      }
+    if (i % 10 == 0) {
+      backLine += 50;
+      line = width - width / 2;
+    } else {
+      line -= 2;
     }
-    //
-    headTypeChain = new TextChain(width/2, height-300, PARAMS.font.bodyBox, PARAMS.font.bodyBox,PARAMS.headType); 
-    var options2 = {
-      bodyA: headTypeChain.body,
-      bodyB: headTypeChain.body,
-      stiffness: 0.9,
-      friction: 0.2,
-      length: 60,
-    };
-    let constraint = Constraint.create(options2);
-    World.add(world, constraint);
+    textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.word[i][0]));
   }
 }
-function writeLetter(){
-  let backLine=height/3;
-  let line = width-width/2;
-  for (let i = 0; i < PARAMS.word.length; i++) {
-    textChain.push([]);  
-    // for (let index = 0; index < PARAMS.word[i].length; index++) {
-      // textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
-      if(i%10==0){
-        backLine+=50;
-        line=  width-width/2;
-      }else{
-        line -=2;
-      }
-      textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox,  PARAMS.font.bodyBox, PARAMS.word[i][0]));
-      // console.log(width-i*10)
-    // }
-  }
+function mouseClicked() {
+//   if (PARAMS.state.stateMachine <= 1)
+//     PARAMS.state.stateMachine++;
+// }else {
+//   PARAMS.state.stateMachine = 0;
+// }
+}
+function mouseMoved() {
+  // let valueLerp = lerp(width / 2, 50, PARAMS.positionWord.ease);
+  // const prevMouse = mouseX;
+  // var options2 = {
+  //   bodyA: textChain[0][0].body,
+  //   pointB: { x: width / 2, y: height / 2 },
+  //   stiffness: 0.9,
+  //   friction: 0.9,
+  //   length: valueLerp,
+  // };
+  // PARAMS.positionWord.ease += 0.01;
+  // let constraint = Constraint.create(options2);
+  // textChain[0][0].textWorld = World.add(world, constraint);
 }
