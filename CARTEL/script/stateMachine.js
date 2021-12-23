@@ -6,3 +6,9 @@ function changeStateMachine(){
       }
       return    PARAMS.state.stateMachine;
 }
+function  sendLastLetterPosition(physicLetter,numberLetter){
+  for (let index = 0; index < numberLetter; index++) {
+   PARAMS.positionWord.p0.LastPosition.push(physicLetter[index][0].body)
+  }
+  // console.log(PARAMS.positionWord.p0.LastPosition);
+};

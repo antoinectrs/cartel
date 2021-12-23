@@ -22,19 +22,29 @@ function fallNobody() {
 }
 function stickText(){
   if(PARAMS.state.stateMachine==1){
-    let valueLerp = lerp(width / 4, 0, PARAMS.positionWord.ease);
-    const prevMouse = mouseX;
-    var options2 = {
-      bodyA: textChain[0][0].body,
-      pointB: { x: width / 2, y: height / 2 },
-      stiffness: 0.9,
-      friction: 0.9,
-      length: valueLerp ,
-    };
+   
+  
     if( PARAMS.positionWord.ease<1)PARAMS.positionWord.ease += 0.01;
-    console.log(valueLerp);
-    let constraint = Constraint.create(options2);
-    textChain[0][0].textWorld = World.add(world, constraint);
+   
+    for (let index = 0; index < 1; index++) {
+      // console.log(PARAMS.positionWord.p0.LastPosition[0].position.x)
+      let distCalcul = dist(PARAMS.positionWord.p0.LastPosition[0].position.x, PARAMS.positionWord.p0.LastPosition[0].position.y, width/2, height/2);
+      let lerpLength = lerp(distCalcul, 0, PARAMS.positionWord.ease);
+      // console.log("distCalcul ", distCalcul,"lerpLength ",lerpLength)
+      const decay = index-50;
+
+      var options2 = {
+        bodyA: textChain[index][0].body,
+        pointB: { x:PARAMS.positionWord.p0.x, y: PARAMS.positionWord.p0.y},
+        stiffness: 0.9,
+        friction: 0.9,
+        length: lerpLength ,
+      };
+      let constraint = Constraint.create(options2);
+      // console.log(textChain[index][0]);
+      textChain[index][0].textWorld = World.add(world, constraint);
+    }
+  
   }else{
     PARAMS.positionWord.ease=0;
   }

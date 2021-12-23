@@ -36,6 +36,7 @@ var body = document.getElementsByTagName("body")[0];
 function setup() {
   myWidth = windowWidth;
   myHeight = windowHeight;
+  setDimensionParams (myWidth, myHeight)
   video.width = myWidth;
   video.height = myHeight;
   body.appendChild(video);
@@ -164,6 +165,7 @@ function writeLetter() {
   }
 }
 function mouseClicked() {
+  sendLastLetterPosition(textChain,8);
   changeStateMachine();
-  console.log(changeStateMachine())
+  // console.log(textChain)
 }

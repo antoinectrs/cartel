@@ -15,16 +15,45 @@ let PARAMS = {
         bodyBox:41,
         spacing: 50,
     },
+    // word: [
+    //     "a",
+    //     "n",
+    //     "t",
+    //     "o",
+    //     "i",
+    //     "n",
+    //     "e",
+    //     "h",
+    //     "i",
+    //     "j",
+    //     "k",
+    //     "l",
+    //     "m",
+    //     "n",
+    //     "o",
+    //     "p",
+    //     "q",
+    //     "r",
+    //     "s",
+    //     "t",
+    //     "u",
+    //     "v",
+    //     "w",
+    //     "x",
+    //     "y",
+    //     "z"
+    //     // "0123"
+    // ],
     word: [
+        "F",
+        "r",
         "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
+        "n",
+        "t",
         "i",
+        "č",
+        "e",
+        "k",
         "j",
         "k",
         "l",
@@ -63,9 +92,14 @@ let PARAMS = {
     },
     positionWord:{
          p0:{
-            x:200,y:200
+           //x y target check setDimensionParams
+          LastPosition:[],
          },
          ease:0,
     }
 }
 
+function  setDimensionParams (myWidth, myHeight) {
+    PARAMS.positionWord.p0.x = myWidth/2;
+    PARAMS.positionWord.p0.y = myHeight/2;
+ }
