@@ -90,6 +90,7 @@ function draw() {
   textSize(40);
   if (PARAMS.posnet.model) {
     standardBloc();
+    stickText();
     // introBloc(PARAMS.state.variableFont);
   }
   rectMode(CENTER);
@@ -163,23 +164,6 @@ function writeLetter() {
   }
 }
 function mouseClicked() {
-//   if (PARAMS.state.stateMachine <= 1)
-//     PARAMS.state.stateMachine++;
-// }else {
-//   PARAMS.state.stateMachine = 0;
-// }
-}
-function mouseMoved() {
-  // let valueLerp = lerp(width / 2, 50, PARAMS.positionWord.ease);
-  // const prevMouse = mouseX;
-  // var options2 = {
-  //   bodyA: textChain[0][0].body,
-  //   pointB: { x: width / 2, y: height / 2 },
-  //   stiffness: 0.9,
-  //   friction: 0.9,
-  //   length: valueLerp,
-  // };
-  // PARAMS.positionWord.ease += 0.01;
-  // let constraint = Constraint.create(options2);
-  // textChain[0][0].textWorld = World.add(world, constraint);
+  changeStateMachine();
+  console.log(changeStateMachine())
 }

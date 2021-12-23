@@ -20,6 +20,25 @@ function fallNobody() {
     engine.world.gravity.y =1;
   }
 }
+function stickText(){
+  if(PARAMS.state.stateMachine==1){
+    let valueLerp = lerp(width / 4, 0, PARAMS.positionWord.ease);
+    const prevMouse = mouseX;
+    var options2 = {
+      bodyA: textChain[0][0].body,
+      pointB: { x: width / 2, y: height / 2 },
+      stiffness: 0.9,
+      friction: 0.9,
+      length: valueLerp ,
+    };
+    if( PARAMS.positionWord.ease<1)PARAMS.positionWord.ease += 0.01;
+    console.log(valueLerp);
+    let constraint = Constraint.create(options2);
+    textChain[0][0].textWorld = World.add(world, constraint);
+  }else{
+    PARAMS.positionWord.ease=0;
+  }
+}
 function changeSizeIntro(headTypeChain,state,keyPoint) { 
   // Matter.Body.scale(headTypeChain.body, 5, 5);
   if(PARAMS.state.intro){
