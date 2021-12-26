@@ -27,9 +27,8 @@ function preload() {
     Constraint = Matter.Constraint;
 
   PARAMS.fontFam = loadFont('assets/proto.otf');
-  for (let index = 0; index < PARAMS.word.length; index++) {
-    PARAMS.word[index][0] = PARAMS.word[index][0].split('');
-  }
+  setUpWord();
+
 }
 var video = document.createElement("video");
 var body = document.getElementsByTagName("body")[0];
@@ -54,6 +53,7 @@ function setup() {
   const sendLetter = [];
   // writeChaine();
   writeLetter();
+  console.log( textChain);
   // create ground
   ground = Bodies.rectangle(myWidth / 2, myHeight, myWidth, 10, { isStatic: true });
   ground2 = Bodies.rectangle(0, myHeight / 2, 10, myHeight, { isStatic: true });
@@ -155,16 +155,20 @@ function writeChaine() {
 function writeLetter() {
   let backLine = height / 3;
   let line = width - width / 2;
-  for (let i = 0; i < PARAMS.word.length; i++) {
-    textChain.push([]);
-    if (i % 20 == 0) {
-      backLine += 50;
-      line = width - width / 2;
-    } else {
-      line -= 2;
+  for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
+      textChain.push([]);
+    for (let index = 0; index <  PARAMS.wordRetriger[i].length; index++) {    
+    
+      if (index % 20 == 0) {
+        backLine += 20;
+        line = width - width / 2;
+      } else {
+        line -= 2;
+      }
+      textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
     }
-    textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.word[i][0]));
   }
+  console.log(textChain);
 }
 function mouseClicked() {
   sendLastLetterPosition(textChain,8);
