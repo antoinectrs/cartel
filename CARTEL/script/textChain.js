@@ -24,7 +24,7 @@ function TextChain(x, y, w, h, letter) {
     // rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);
-    translate(-52.5 * this.ratio, -70 * this.ratio);
+    translate(-30 * this.ratio, -45 * this.ratio);
     text(letter, this.w, this.h)
     pop();
   };

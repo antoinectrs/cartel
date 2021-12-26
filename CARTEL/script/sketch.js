@@ -89,6 +89,8 @@ function draw() {
   drawKeypoints();
   // Engine.update(engine);
   textSize(40);
+  // image(capture, 0, 0, 320, 240);
+  // image(video,0,0,myWidth,myHeight);
   if (PARAMS.posnet.model) {
     standardBloc();
     stickText();
@@ -155,7 +157,7 @@ function writeLetter() {
   let line = width - width / 2;
   for (let i = 0; i < PARAMS.word.length; i++) {
     textChain.push([]);
-    if (i % 10 == 0) {
+    if (i % 20 == 0) {
       backLine += 50;
       line = width - width / 2;
     } else {
