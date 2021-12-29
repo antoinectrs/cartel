@@ -45,7 +45,9 @@ let PARAMS = {
     //     // "0123"
     // ],
     word: [
-      "hello ca va"
+      "une fleur voulait atteindre le"
+    //   "une fleur voulait atteindre le soleil se haussait sur sa tige j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
+    //   "une fleur voulait atteindre le soleil se haussait sur sa tige au détriment de sa corolle de ses feuilles et de son teint j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
         // "0123"
     ],
     separateWords:null,

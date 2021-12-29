@@ -55,10 +55,16 @@ function setup() {
   writeLetter();
   console.log( textChain);
   // create ground
-  ground = Bodies.rectangle(myWidth / 2, myHeight, myWidth, 10, { isStatic: true });
-  ground2 = Bodies.rectangle(0, myHeight / 2, 10, myHeight, { isStatic: true });
-  ground3 = Bodies.rectangle(myWidth / 2, 0, myWidth, 10, { isStatic: true });
-  ground4 = Bodies.rectangle(myWidth, myHeight / 2, 10, myHeight, { isStatic: true });
+  const deph = 50;
+  // rect(myWidth / 2, myHeight+deph/2, myWidth, deph);
+  
+  // rect(-deph/2, myHeight / 2, deph, myHeight)
+  // rect(myWidth / 2, -deph/2, myWidth, deph)
+  // rect(myWidth+deph/2, myHeight / 2, deph, myHeight)
+  ground = Bodies.rectangle(myWidth / 2, myHeight+deph/2, myWidth, deph, { isStatic: true });
+  ground2 = Bodies.rectangle(-deph/2, myHeight / 2, deph, myHeight, { isStatic: true });
+  ground3 = Bodies.rectangle(myWidth / 2, -deph/2, myWidth, deph, { isStatic: true });
+  ground4 = Bodies.rectangle(myWidth+deph/2, myHeight / 2, deph, myHeight, { isStatic: true });
 
   World.add(world, ground);
   World.add(world, ground2);
@@ -67,6 +73,7 @@ function setup() {
   Engine.run(engine);
   grav = HALF_PI;
   theta = QUARTER_PI * 0.125;
+  pixelDensity(0.3);
 }
 function bodiesUpdate() {
   if (bodies.length > bodiesMaxLength) {
@@ -87,6 +94,7 @@ function draw() {
   stiffness: PARAMS.remap,
     background(255);
   drawKeypoints();
+  drawColision();
   // Engine.update(engine);
   textSize(40);
   // image(capture, 0, 0, 320, 240);
@@ -159,7 +167,7 @@ function writeLetter() {
       textChain.push([]);
     for (let index = 0; index <  PARAMS.wordRetriger[i].length; index++) {    
     
-      if (index % 20 == 0) {
+      if (index % 20 == 0 && index!=0 ) {
         backLine += 20;
         line = width - width / 2;
       } else {

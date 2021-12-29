@@ -9,7 +9,7 @@ function changeGravity (keyPoint){
         const xMap = map(keyPoint.x, 0, myWidth, -PARAMS.physics.gravityForce, PARAMS.physics.gravityForce,);
         const yMap = map(keyPoint.y, 0, myHeight, -PARAMS.physics.gravityForce, PARAMS.physics.gravityForce,);
         engine.world.gravity.x =xMap;
-        engine.world.gravity.y =yMap;
+        engine.world.gravity.y   =yMap;
       }
 }
 function fallNobody() {
@@ -22,7 +22,6 @@ function fallNobody() {
 }
 function stickText(){
   if(PARAMS.state.stateMachine==1){
-   
     // if( PARAMS.positionWord.ease<0.4){PARAMS.positionWord.ease += 0.0001;}
     // else
      if( PARAMS.positionWord.ease<1){
@@ -36,8 +35,6 @@ function stickText(){
       let distCalcul = dist(PARAMS.positionWord.p0.LastPosition[0].position.x, PARAMS.positionWord.p0.LastPosition[0].position.y, decay, height/2);
       let lerpLength = lerp(distCalcul, 0, PARAMS.positionWord.ease);
       // console.log("distCalcul ", distCalcul,"lerpLength ",lerpLength)
-     
-
       var options2 = {
         bodyA: textChain[index][0].body,
         pointB: { x:decay, y: height/2},
@@ -80,3 +77,19 @@ function changeSizeIntro(headTypeChain,state,keyPoint) {
   }
 
  }
+function drawColision(){
+  const deph = 50;
+  
+  // push();
+  rect(myWidth / 2, myHeight+deph/2, myWidth, deph);
+  // pop();
+
+  push();
+  rect(myWidth / 2, -deph/2, myWidth, deph)
+  pop();
+  rect(-deph/2, myHeight / 2, deph, myHeight)
+ 
+  
+  
+  rect(myWidth+deph/2, myHeight / 2, deph, myHeight)
+}
