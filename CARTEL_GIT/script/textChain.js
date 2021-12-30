@@ -9,7 +9,7 @@ function TextChain(x, y, w, h, letter) {
   // this.fSize= fSize;
   this.pos;
   this.body = Bodies.rectangle(x, y, w, h, options);
- this.textWorld = World.add(world, this.body);
+  this.textWorld = World.add(world, this.body);
 
   this.show = function () {
     this.pos = this.body.position;

@@ -55,16 +55,11 @@ function setup() {
   writeLetter();
   console.log( textChain);
   // create ground
-  const deph = 50;
-  // rect(myWidth / 2, myHeight+deph/2, myWidth, deph);
-  
-  // rect(-deph/2, myHeight / 2, deph, myHeight)
-  // rect(myWidth / 2, -deph/2, myWidth, deph)
-  // rect(myWidth+deph/2, myHeight / 2, deph, myHeight)
-  ground = Bodies.rectangle(myWidth / 2, myHeight+deph/2, myWidth, deph, { isStatic: true });
-  ground2 = Bodies.rectangle(-deph/2, myHeight / 2, deph, myHeight, { isStatic: true });
-  ground3 = Bodies.rectangle(myWidth / 2, -deph/2, myWidth, deph, { isStatic: true });
-  ground4 = Bodies.rectangle(myWidth+deph/2, myHeight / 2, deph, myHeight, { isStatic: true });
+ 
+  ground = Bodies.rectangle(myWidth / 2, myHeight+PARAMS.physics.bodyDeph/2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
+  ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph/2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
+  ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph/2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
+  ground4 = Bodies.rectangle(myWidth+PARAMS.physics.bodyDeph/2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
 
   World.add(world, ground);
   World.add(world, ground2);
@@ -115,7 +110,6 @@ function standardBloc() {
   for (let i = 0; i < textChain.length; i++) {
     for (var index = 0; index < textChain[i].length; index++) {
       textChain[i][index].show();
-
       // console.log(textChain[i][index].textWorld);
     }
   }
@@ -179,6 +173,7 @@ function writeLetter() {
   console.log(textChain);
 }
 function mouseClicked() {
+  
   sendLastLetterPosition(textChain,8);
   changeStateMachine();
   // console.log(textChain)
