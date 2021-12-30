@@ -39,7 +39,7 @@ function stickText() {
 function setUpChain() {
   for (let index = 0; index < 2; index++) {
     const decay = (width / 2) + index * 100;
-    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[0].position.x, PARAMS.positionWord.p0.LastPosition[0].position.y, decay, height / 2))
+    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
     var options2 = {
       bodyA: textChain[index][0].body,
       pointB: { x: decay, y: height / 2 },
@@ -49,7 +49,7 @@ function setUpChain() {
     };
     // PARAMS.positionWord.constraint = Constraint.create(options2);
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
-    World.add(world,PARAMS.positionWord.DynamicLenght[index]);
+    World.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 }
 function chainLenght() {
@@ -58,7 +58,7 @@ function chainLenght() {
     const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
     PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
   }
-  
+
 }
 function changeSizeIntro(headTypeChain, state, keyPoint) {
   // Matter.Body.scale(headTypeChain.body, 5, 5);
