@@ -30,58 +30,35 @@ function stickText() {
     }
     if (PARAMS.positionWord.ease <= 1) {
       PARAMS.positionWord.ease += 0.01;
-      // setUpChain();
       chainLenght();
-      // console.log(debug)
     }
   } else {
     PARAMS.positionWord.ease = 0;
   }
 }
 function setUpChain() {
-  for (let index = 0; index < 1; index++) {
+  for (let index = 0; index < 2; index++) {
     const decay = (width / 2) + index * 100;
-    // console.log(PARAMS.positionWord.p0.LastPosition[0].position.x)
-    // let distCalcul = ;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[0].position.x, PARAMS.positionWord.p0.LastPosition[0].position.y, decay, height / 2))
-    // const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
-    // console.log("distCalcul", distCalcul,"lerpLength ",lerpLength)
-
     var options2 = {
       bodyA: textChain[index][0].body,
-      // pointB: { x: decay, y: height / 2 },
       pointB: { x: decay, y: height / 2 },
       // stiffness: 0.9,
       // friction: 0.9,
-      length:PARAMS.positionWord.distCalcul[index],
+      length: PARAMS.positionWord.distCalcul[index],
     };
-   
-    // PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
-    PARAMS.positionWord.constraint = Constraint.create(options2);
-  
-
-    // textChain[index][0].textWorld = World.add(world, constraint);
-    // console.log( PARAMS.positionWord.DynamicLenght[index]);
-    // textWorld
-    // textChain[index][0].textWorld
-    // console.log(textChain[index][0].textWorld.constraints.length);
-    // PARAMS.positionWord.DynamicLenght[index]=0;
-    // World.add(world, PARAMS.positionWord.DynamicLenght[index])
-    World.add(world,PARAMS.positionWord.constraint);
-    // constraint.length=10 
-    // console.log(constraint.l ength)
-    // console.log(textChain[0][0].textWorld.constraints.length);
+    // PARAMS.positionWord.constraint = Constraint.create(options2);
+    PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
+    World.add(world,PARAMS.positionWord.DynamicLenght[index]);
   }
 }
 function chainLenght() {
- 
   // console.log(PARAMS.positionWord.constraint);
- const lerpLength = lerp(PARAMS.positionWord.distCalcul[0], 0, PARAMS.positionWord.ease);
- PARAMS.positionWord.constraint.length=lerpLength;
-//  PARAMS.positionWord.DynamicLenght[0]=lerpLength;
-//  PARAMS.positionWord.DynamicLenght[0]=0;
-//  console.log(PARAMS.positionWord.DynamicLenght[0]);
-
+  for (let index = 0; index < 2; index++) {
+    const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
+    PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
+  }
+  
 }
 function changeSizeIntro(headTypeChain, state, keyPoint) {
   // Matter.Body.scale(headTypeChain.body, 5, 5);
