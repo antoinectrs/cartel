@@ -35,7 +35,7 @@ var body = document.getElementsByTagName("body")[0];
 function setup() {
   myWidth = windowWidth;
   myHeight = windowHeight;
-  setDimensionParams (myWidth, myHeight)
+  setDimensionParams(myWidth, myHeight)
   video.width = myWidth;
   video.height = myHeight;
   body.appendChild(video);
@@ -53,13 +53,13 @@ function setup() {
   const sendLetter = [];
   // writeChaine();
   writeLetter();
-  console.log( textChain);
+  console.log(textChain);
   // create ground
- 
-  ground = Bodies.rectangle(myWidth / 2, myHeight+PARAMS.physics.bodyDeph/2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
-  ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph/2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
-  ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph/2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
-  ground4 = Bodies.rectangle(myWidth+PARAMS.physics.bodyDeph/2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
+
+  ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
+  ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
+  ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
+  ground4 = Bodies.rectangle(myWidth + PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
 
   World.add(world, ground);
   World.add(world, ground2);
@@ -68,7 +68,7 @@ function setup() {
   Engine.run(engine);
   grav = HALF_PI;
   theta = QUARTER_PI * 0.125;
-  pixelDensity(0.3);
+  // pixelDensity(0.3);
 }
 function bodiesUpdate() {
   if (bodies.length > bodiesMaxLength) {
@@ -97,7 +97,6 @@ function draw() {
   if (PARAMS.posnet.model) {
     standardBloc();
     stickText();
-    // introBloc(PARAMS.state.variableFont);
   }
   rectMode(CENTER);
 }
@@ -125,43 +124,15 @@ function writeChaine() {
   for (let index = 0; index < PARAMS.word[0].length; index++) {
     // textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
     textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[0][index]));
-    if (textChain[0][index] != textChain[0][0]) {
-      // var options2 = {
-      //   bodyA: textChain[0][index].body,
-      //   bodyB: textChain[0][index - 1].body,
-      //   stiffness: 0.9,
-      //   friction: 0.2,
-      //   length: 60,
-      // };
-
-      // let constraint = Constraint.create(options2);
-      // World.add(world, constraint);
-      // textChain[0].setPhysics();
-    }
-
-
   }
-  //
-  // headTypeChain = new TextChain(width/2, height-300, PARAMS.font.bodyBox, PARAMS.font.bodyBox,PARAMS.headType); 
-  // var options2 = {
-  //   bodyA: headTypeChain.body,
-  //   bodyB: headTypeChain.body,
-  //   stiffness: 0.9,
-  //   friction: 0.2,
-  //   length: 60,
-  // };
-  // let constraint = Constraint.create(options2);
-  // World.add(world, constraint);
-  // }
 }
 function writeLetter() {
   let backLine = height / 3;
   let line = width - width / 2;
   for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
-      textChain.push([]);
-    for (let index = 0; index <  PARAMS.wordRetriger[i].length; index++) {    
-    
-      if (index % 20 == 0 && index!=0 ) {
+    textChain.push([]);
+    for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
+      if (index % 20 == 0 && index != 0) {
         backLine += 20;
         line = width - width / 2;
       } else {
@@ -173,8 +144,6 @@ function writeLetter() {
   console.log(textChain);
 }
 function mouseClicked() {
-  
-  sendLastLetterPosition(textChain,8);
+  sendLastLetterPosition(textChain, 8);
   changeStateMachine();
-  // console.log(textChain)
 }

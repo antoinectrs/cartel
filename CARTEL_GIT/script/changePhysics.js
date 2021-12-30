@@ -22,15 +22,15 @@ function fallNobody() {
 }
 function stickText() {
   if (PARAMS.state.stateMachine == 1) {
-    // if( PARAMS.positionWord.ease<0.4){PARAMS.positionWord.ease += 0.0001;}
-    // else
-
     if (PARAMS.positionWord.ease == 0) {
-      setUpChain();
+      setUpChain();     
     }
     if (PARAMS.positionWord.ease <= 1) {
       PARAMS.positionWord.ease += 0.01;
       chainLenght();
+    }else{
+      setRotation (0)
+      setRotation (3)
     }
   } else {
     PARAMS.positionWord.ease = 0;
@@ -38,7 +38,7 @@ function stickText() {
 }
 function setUpChain() {
   for (let index = 0; index < 2; index++) {
-    const decay = (width / 2) + index * 100;
+    const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
     var options2 = {
       bodyA: textChain[index][0].body,
@@ -47,18 +47,15 @@ function setUpChain() {
       // friction: 0.9,
       length: PARAMS.positionWord.distCalcul[index],
     };
-    // PARAMS.positionWord.constraint = Constraint.create(options2);
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
     World.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 }
 function chainLenght() {
-  // console.log(PARAMS.positionWord.constraint);
   for (let index = 0; index < 2; index++) {
     const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
     PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
   }
-
 }
 function changeSizeIntro(headTypeChain, state, keyPoint) {
   // Matter.Body.scale(headTypeChain.body, 5, 5);
@@ -85,9 +82,21 @@ function changeSizeIntro(headTypeChain, state, keyPoint) {
 }
 function drawColision() {
   const deph = 50;
-
   rect(myWidth / 2, myHeight + deph / 2, myWidth, deph);
   rect(myWidth / 2, -deph / 2, myWidth, deph)
   rect(-deph / 2, myHeight / 2, deph, myHeight)
   rect(myWidth + deph / 2, myHeight / 2, deph, myHeight)
+}
+function setRotation (index){
+  Matter.Body.setAngle(world.bodies[index], 0)
+  // const degCalcul = world.bodies[0].angle;
+  //   const degModulo = (degCalcul%6).toFixed(2);
+  //   if (degModulo== 0) {
+  //     console.log("cloc");
+  //     // Body.rotate(world.bodies[0], Math.PI / 10);
+  //   }else{
+  //     Body.inertia
+  //     // Body.rotate(world.bodies[0], Math.PI / 100);
+  //   }
+  //   console.log(degModulo);
 }
