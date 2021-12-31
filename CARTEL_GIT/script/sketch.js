@@ -144,6 +144,6 @@ function writeLetter() {
   console.log(textChain);
 }
 function mouseClicked() {
-  sendLastLetterPosition(textChain, 8);
+  sendLastLetterPosition(textChain, 3);
   changeStateMachine();
 }

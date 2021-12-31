@@ -30,18 +30,18 @@ function stickText() {
       chainLenght();
     }else{
       setRotation (0)
-      setRotation (3)
+      setRotation (1)
     }
   } else {
     PARAMS.positionWord.ease = 0;
   }
 }
 function setUpChain() {
-  for (let index = 0; index < 2; index++) {
+  for (let index = 0; index < PARAMS.positionWord.p0.LastPosition.length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
     var options2 = {
-      bodyA: textChain[index][0].body,
+      bodyA: textChain[0][index].body,
       pointB: { x: decay, y: height / 2 },
       // stiffness: 0.9,
       // friction: 0.9,
@@ -52,7 +52,7 @@ function setUpChain() {
   }
 }
 function chainLenght() {
-  for (let index = 0; index < 2; index++) {
+  for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
     const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
     PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
   }
@@ -89,14 +89,4 @@ function drawColision() {
 }
 function setRotation (index){
   Matter.Body.setAngle(world.bodies[index], 0)
-  // const degCalcul = world.bodies[0].angle;
-  //   const degModulo = (degCalcul%6).toFixed(2);
-  //   if (degModulo== 0) {
-  //     console.log("cloc");
-  //     // Body.rotate(world.bodies[0], Math.PI / 10);
-  //   }else{
-  //     Body.inertia
-  //     // Body.rotate(world.bodies[0], Math.PI / 100);
-  //   }
-  //   console.log(degModulo);
 }
