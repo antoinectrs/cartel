@@ -55,10 +55,10 @@ function setup() {
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground4 = Bodies.rectangle(myWidth + PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
-  World.add(world, ground);
-  World.add(world, ground2);
-  World.add(world, ground3);
-  World.add(world, ground4);
+  Composite.add(world, ground);
+  Composite.add(world, ground2);
+  Composite.add(world, ground3);
+  Composite.add(world, ground4);
   Engine.run(engine);
   grav = HALF_PI;
   theta = QUARTER_PI * 0.125;

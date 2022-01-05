@@ -25,7 +25,7 @@ function assignWordToLevel() {
   switch (PARAMS.state.stateMachine) {
     case 1: customEase(1);
     case 2:
-      // removeChain(PARAMS.state.stateMachine);
+      removeChain(PARAMS.state.stateMachine);
       customEase(2);
     default:
   }
@@ -45,11 +45,11 @@ function customEase(WordMove) {
     }
   } else {
     PARAMS.positionWord.ease = 0;
-    // console.log("rese7");
+  
   }
 }
 function setUpChain(WordMove) {
-
+  PARAMS.positionWord.DynamicLenght=[];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
@@ -62,14 +62,16 @@ function setUpChain(WordMove) {
       length: PARAMS.positionWord.distCalcul[index],
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
-    World.add(world, PARAMS.positionWord.DynamicLenght[index]);
+    Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 }
-// function removeChain(param) {
-//   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
-//     PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
-//   }
-// }
+function removeChain(param) {
+  // for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
+  //   PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
+  // }
+  console.log(world.bodies.length-4)
+  // console.log(PARAMS.positionWord.DynamicLenght.length)
+}
 function chainLenght() {
   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
     const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
