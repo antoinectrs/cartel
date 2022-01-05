@@ -96,7 +96,7 @@ function draw() {
   // image(video,0,0,myWidth,myHeight);
   if (PARAMS.posnet.model) {
     standardBloc();
-    stickText();
+    assignWordToLevel();
   }
   rectMode(CENTER);
 }

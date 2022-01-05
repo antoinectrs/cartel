@@ -15,40 +15,10 @@ let PARAMS = {
         bodyBox:25,
         spacing: 0,
     },
-    // word: [
-    //     "a",
-    //     "n",
-    //     "t",
-    //     "o",
-    //     "i",
-    //     "n",
-    //     "e",
-    //     "h",
-    //     "i",
-    //     "j",
-    //     "k",
-    //     "l",
-    //     "m",
-    //     "n",
-    //     "o",
-    //     "p",
-    //     "q",
-    //     "r",
-    //     "s",
-    //     "t",
-    //     "u",
-    //     "v",
-    //     "w",
-    //     "x",
-    //     "y",
-    //     "z"
-    //     // "0123"
-    // ],
     word: [
-      "une fleur"
+      "une fleur",
     //   "une fleur voulait atteindre le soleil se haussait sur sa tige j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
     //   "une fleur voulait atteindre le soleil se haussait sur sa tige au détriment de sa corolle de ses feuilles et de son teint j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
-        // "0123"
     ],
     separateWords:null,
     wordRetriger:[],

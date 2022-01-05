@@ -20,28 +20,37 @@ function fallNobody() {
     engine.world.gravity.y = 1;
   }
 }
-function stickText() {
+
+function assignWordToLevel(){
+  switch (PARAMS.state.stateMachine){
+    case 1:customEase(1);
+    case 2://customEase(1);
+    default: 
+  }
+}
+function customEase(WordMove) {
   if (PARAMS.state.stateMachine == 1) {
     if (PARAMS.positionWord.ease == 0) {
-      setUpChain();     
+      setUpChain(WordMove);     
     }
     if (PARAMS.positionWord.ease <= 1) {
       PARAMS.positionWord.ease += 0.01;
       chainLenght();
     }else{
-      setRotation (0)
-      setRotation (1)
+      setRotation (0);
+      setRotation (1);
     }
   } else {
     PARAMS.positionWord.ease = 0;
   }
 }
 function setUpChain(WordMove) {
+  console.log(PARAMS.separateWords[WordMove]);
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
     var options2 = {
-      bodyA: textChain[0][index].body,
+      bodyA: textChain[WordMove][index].body,
       pointB: { x: decay, y: height / 2 },
       // stiffness: 0.9,
       // friction: 0.9,
