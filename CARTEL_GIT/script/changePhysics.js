@@ -15,42 +15,45 @@ function changeGravity(keyPoint) {
 function fallNobody() {
   if (frameCount % 50 == 0) {
     PARAMS.state.oneUser = false;
-    console.log("isChanging!");
+    // console.log("isChanging!");
     engine.world.gravity.x = 0;
     engine.world.gravity.y = 1;
   }
 }
 
-function assignWordToLevel(){
-  switch (PARAMS.state.stateMachine){
-    case 1:
-      customEase(1);
-    case 2://customEase(1);
-    default: 
+function assignWordToLevel() {
+  switch (PARAMS.state.stateMachine) {
+    case 1: customEase(1);
+    case 2:
+      // removeChain(PARAMS.state.stateMachine);
+      customEase(2);
+    default:
   }
 }
 function customEase(WordMove) {
   if (PARAMS.state.stateMachine == 1) {
     if (PARAMS.positionWord.ease == 0) {
-      setUpChain(WordMove-1);     
+      setUpChain(WordMove - 1);
     }
     if (PARAMS.positionWord.ease <= 1) {
       PARAMS.positionWord.ease += 0.01;
       chainLenght();
-      // console.log(PARAMS.wordInterval);
-    }else{
-      for (let index = PARAMS.wordInterval[WordMove-1]; index < PARAMS.wordInterval[WordMove]; index++) {
-        setRotation (index);   
+    } else {
+      for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
+        setRotation(index);
       }
     }
   } else {
     PARAMS.positionWord.ease = 0;
+    // console.log("rese7");
   }
 }
 function setUpChain(WordMove) {
+
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
+
     var options2 = {
       bodyA: textChain[WordMove][index].body,
       pointB: { x: decay, y: height / 2 },
@@ -62,6 +65,11 @@ function setUpChain(WordMove) {
     World.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 }
+// function removeChain(param) {
+//   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
+//     PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
+//   }
+// }
 function chainLenght() {
   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
     const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
@@ -74,22 +82,13 @@ function changeSizeIntro(headTypeChain, state, keyPoint) {
     headTypeChain.w = 100;
     headTypeChain.h = 100;
     headTypeChain.ratio = 2;
-
     PARAMS.state.variableFont = 100
-    // console.log( headTypeChain.pos.x);
-    // Matter.Body.scale(headTypeChain.body, 5, 5);
-    // headTypeChain.pos.x=myWidth/2;
-    // headTypeChain.pos.y=myHeight/2;
-    // console.log(headTypeChain.pos);
-    // headTypeChain.pos.x= keyPoint.x;
-    // headTypeChain.pos.y=  engine.world.gravity.y
   } else {
     PARAMS.state.variableFont = 40;
     headTypeChain.w = 50;
     headTypeChain.h = 50;
     headTypeChain.ratio = 1;
   }
-
 }
 function drawColision() {
   const deph = 50;
@@ -98,6 +97,6 @@ function drawColision() {
   rect(-deph / 2, myHeight / 2, deph, myHeight)
   rect(myWidth + deph / 2, myHeight / 2, deph, myHeight)
 }
-function setRotation (index){
+function setRotation(index) {
   Matter.Body.setAngle(world.bodies[index], 0)
 }

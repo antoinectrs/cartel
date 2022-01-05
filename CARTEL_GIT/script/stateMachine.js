@@ -1,18 +1,19 @@
 function changeStateMachine(){
-    if (PARAMS.state.stateMachine <= 1) {
+  console.log(PARAMS.state.stateMachine);
+    if (PARAMS.state.stateMachine < 1) {
         PARAMS.state.stateMachine++;
       } else {
         PARAMS.state.stateMachine = 0;
       }
       return PARAMS.state.stateMachine;
 }
-function  sendLastLetterPosition(physicLetter,numberLetter){
+function  sendLastLetterPosition(physicLetter,level){
+  console.log(PARAMS.separateWords[level]);
   for (let index = 0; index < PARAMS.separateWords.length; index++) {
-    console.log(physicLetter[index].length);
+    // console.log(physicLetter[index].length);
     for (let i = 0; i <physicLetter[index].length; i++) {
       PARAMS.positionWord.p0.LastPosition.push(physicLetter[index][i].body)
     }
-
   }
 };
 function setUpWord(param) {

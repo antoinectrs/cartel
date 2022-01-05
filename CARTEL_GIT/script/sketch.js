@@ -48,19 +48,13 @@ function setup() {
 
   engine = Engine.create();
   world = engine.world;
-  noGravity();
-  // let  constraint = Constraint.create(options);
+  // noGravity();
   const sendLetter = [];
-  // writeChaine();
   writeLetter();
-  console.log(textChain);
-  // create ground
-
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground4 = Bodies.rectangle(myWidth + PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
-
   World.add(world, ground);
   World.add(world, ground2);
   World.add(world, ground3);
@@ -90,7 +84,6 @@ function draw() {
     background(255);
   drawKeypoints();
   drawColision();
-  // Engine.update(engine);
   textSize(40);
   // image(capture, 0, 0, 320, 240);
   // image(video,0,0,myWidth,myHeight);
@@ -100,18 +93,16 @@ function draw() {
   }
   rectMode(CENTER);
 }
-function mouseClicked() {
-  PARAMS.state.intro = !PARAMS.state.intro
-  changeSizeIntro(headTypeChain, PARAMS.state.intro);
-}
 
 function standardBloc() {
   for (let i = 0; i < textChain.length; i++) {
     for (var index = 0; index < textChain[i].length; index++) {
       textChain[i][index].show();
-      // console.log(textChain[i][index].textWorld);
+      // console.log(textChain[i][index]);
     }
   }
+  // console.log(world.bodies.length-4)
+  // console.log(world.bodies)
 }
 function introBloc(variable) {
   textSize(variable);
@@ -141,9 +132,8 @@ function writeLetter() {
       textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
     }
   }
-  console.log(textChain);
+  // console.log(textChain);
 }
 function mouseClicked() {
-  sendLastLetterPosition(textChain, 3);
-  changeStateMachine();
+  sendLastLetterPosition(textChain,  changeStateMachine());
 }
