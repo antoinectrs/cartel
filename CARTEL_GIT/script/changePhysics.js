@@ -23,7 +23,8 @@ function fallNobody() {
 
 function assignWordToLevel(){
   switch (PARAMS.state.stateMachine){
-    case 1:customEase(1);
+    case 1:
+      customEase(0);
     case 2://customEase(1);
     default: 
   }
@@ -36,16 +37,20 @@ function customEase(WordMove) {
     if (PARAMS.positionWord.ease <= 1) {
       PARAMS.positionWord.ease += 0.01;
       chainLenght();
+      // console.log(PARAMS.wordInterval);
     }else{
-      setRotation (0);
-      setRotation (1);
+      console.log(PARAMS.wordInterval[WordMove]);
+      for (let index = 0; index < PARAMS.wordInterval[WordMove]; index++) {
+        setRotation (index);   
+      }
+      // setRotation (0);
+      // setRotation (1);
     }
   } else {
     PARAMS.positionWord.ease = 0;
   }
 }
 function setUpChain(WordMove) {
-  console.log(PARAMS.separateWords[WordMove]);
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
