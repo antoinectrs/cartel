@@ -8,7 +8,11 @@ function changeStateMachine(){
 }
 function  sendLastLetterPosition(physicLetter,numberLetter){
   for (let index = 0; index < PARAMS.separateWords.length; index++) {
-   PARAMS.positionWord.p0.LastPosition.push(physicLetter[index][0].body)
+    console.log(physicLetter[index].length);
+    for (let i = 0; i <physicLetter[index].length; i++) {
+      PARAMS.positionWord.p0.LastPosition.push(physicLetter[index][i].body)
+    }
+
   }
 };
 function setUpWord(param) {

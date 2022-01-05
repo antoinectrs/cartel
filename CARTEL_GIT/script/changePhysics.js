@@ -36,8 +36,8 @@ function stickText() {
     PARAMS.positionWord.ease = 0;
   }
 }
-function setUpChain() {
-  for (let index = 0; index < PARAMS.positionWord.p0.LastPosition.length; index++) {
+function setUpChain(WordMove) {
+  for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
     var options2 = {
