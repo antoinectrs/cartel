@@ -24,7 +24,7 @@ function fallNobody() {
 function assignWordToLevel(){
   switch (PARAMS.state.stateMachine){
     case 1:
-      customEase(0);
+      customEase(1);
     case 2://customEase(1);
     default: 
   }
@@ -32,19 +32,16 @@ function assignWordToLevel(){
 function customEase(WordMove) {
   if (PARAMS.state.stateMachine == 1) {
     if (PARAMS.positionWord.ease == 0) {
-      setUpChain(WordMove);     
+      setUpChain(WordMove-1);     
     }
     if (PARAMS.positionWord.ease <= 1) {
       PARAMS.positionWord.ease += 0.01;
       chainLenght();
       // console.log(PARAMS.wordInterval);
     }else{
-      console.log(PARAMS.wordInterval[WordMove]);
-      for (let index = 0; index < PARAMS.wordInterval[WordMove]; index++) {
+      for (let index = PARAMS.wordInterval[WordMove-1]; index < PARAMS.wordInterval[WordMove]; index++) {
         setRotation (index);   
       }
-      // setRotation (0);
-      // setRotation (1);
     }
   } else {
     PARAMS.positionWord.ease = 0;
