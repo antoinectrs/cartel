@@ -1,6 +1,6 @@
 function changeStateMachine(){
   // console.log(PARAMS.state.s tateMachine);
-    if (PARAMS.state.stateMachine <= 2) {
+    if (PARAMS.state.stateMachine <= 5) {
         PARAMS.state.stateMachine++;
       } else {
         PARAMS.state.stateMachine = 0;

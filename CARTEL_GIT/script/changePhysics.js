@@ -24,45 +24,51 @@ function fallNobody() {
 function assignWordToLevel() {
   switch (PARAMS.state.stateMachine) {
     case 1: customEase(1);
-    break;
-    case 2: 
-    resetAnimation();
-    customEase(2);
-    break;
+      break;
+    case 2:
+      resetAnimation();
+      customEase(2);
+      break;
     case 3:
-    // console.log(PARAMS.state.stateMachine);
-    break;
+      resetAnimation();
+      customEase(3);
+      break;
+    case 4:
+      resetAnimation();
+      customEase(4);
+      // console.log(PARAMS.state.stateMachine);
+      break;
     // default:
   }
 }
-function resetAnimation(){
-  if(PARAMS.positionWord.init==false){
+function resetAnimation() {
+  if (PARAMS.positionWord.init == false) {
     PARAMS.positionWord.ease = 0;
     removeChain(0);
-    PARAMS.positionWord.init=true;
+    PARAMS.positionWord.init = true;
   }
 }
 function customEase(WordMove) {
   // if (PARAMS.state.stateMachine == 1) {
-    if (PARAMS.positionWord.ease == 0) {
-      setUpChain(WordMove - 1);
+  if (PARAMS.positionWord.ease == 0) {
+    setUpChain(WordMove - 1);
+  }
+  if (PARAMS.positionWord.ease <= 1) {
+    PARAMS.positionWord.ease += 0.01;
+    chainLenght();
+  } else {
+    for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
+      setRotation(index);
     }
-    if (PARAMS.positionWord.ease <= 1) {
-      PARAMS.positionWord.ease += 0.01;
-      chainLenght();
-    } else {
-      for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
-        setRotation(index);
-      }
-    }
+  }
   // } else {
-    // PARAMS.positionWord.ease = 0;
+  // PARAMS.positionWord.ease = 0;
 
   // }
 }
 function setUpChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
-  console.log( PARAMS.separateWords[WordMove].length);
+  // console.log(PARAMS.separateWords[WordMove].length);
   // PARAMS.positionWord.p0.LastPosition
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
@@ -77,12 +83,12 @@ function setUpChain(WordMove) {
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
     Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
-  
+
 }
 function removeChain(WordMove) {
-  // console.log( PARAMS.separateWords[WordMove].length);
+  console.log( PARAMS.separateWords[WordMove].length);
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-  Composite.remove(world,  PARAMS.positionWord.DynamicLenght[index], true)
+    Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true)
   }
 }
 function chainLenght() {
