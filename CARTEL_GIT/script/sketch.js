@@ -15,7 +15,7 @@ let grav;
 let theta;
 // let fps = 15;
 let fps = 30;
-let textChain = [];
+// let textChain = [];
 let headTypeChain;
 function preload() {
   Engine = Matter.Engine,
@@ -95,10 +95,10 @@ function draw() {
 }
 
 function standardBloc() {
-  for (let i = 0; i < textChain.length; i++) {
-    for (var index = 0; index < textChain[i].length; index++) {
-      textChain[i][index].show();
-      // console.log(textChain[i][index]);
+  for (let i = 0; i < PARAMS.textChain.length; i++) {
+    for (var index = 0; index < PARAMS.textChain[i].length; index++) {
+      PARAMS.textChain[i][index].show();
+      // console.log(PARAMS.textChain[i][index]);
     }
   }
   // console.log(world.bodies.length-4)
@@ -110,18 +110,18 @@ function introBloc(variable) {
 }
 function writeChaine() {
   // for (let i = 0; i < PARAMS.word.length; i++) {
-  textChain.push([]);
+  PARAMS.textChain.push([]);
 
   for (let index = 0; index < PARAMS.word[0].length; index++) {
-    // textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
-    textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[0][index]));
+    // PARAMS.textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
+    PARAMS.textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[0][index]));
   }
 }
 function writeLetter() {
   let backLine = height / 3;
   let line = width - width / 2;
   for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
-    textChain.push([]);
+    PARAMS.textChain.push([]);
     for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
       if (index % 20 == 0 && index != 0) {
         backLine += 20;
@@ -129,11 +129,12 @@ function writeLetter() {
       } else {
         line -= 2;
       }
-      textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
+      PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
     }
   }
   // console.log(textChain);
 }
 function mouseClicked() {
-  sendLastLetterPosition(textChain,  changeStateMachine());
+  PARAMS.positionWord.init=false;
+  sendLastLetterPosition( PARAMS.textChain,  changeStateMachine());
 }
