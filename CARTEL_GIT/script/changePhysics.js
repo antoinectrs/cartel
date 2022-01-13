@@ -54,6 +54,7 @@ function customEase(WordMove) {
     setUpChain(WordMove - 1);
   }
   if (PARAMS.positionWord.ease <= 1) {
+    drawKeypoints()
     PARAMS.positionWord.ease += 0.01;
     chainLenght();
   } else {

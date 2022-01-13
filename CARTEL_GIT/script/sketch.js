@@ -46,7 +46,9 @@ function setup() {
   textAlign(CENTER, CENTER);
   frameRate(fps);
 
-  engine = Engine.create();
+  engine = Engine.create(
+    // {enableSleeping: true },
+  ) 
   world = engine.world;
   // noGravity();
   const sendLetter = [];
@@ -82,7 +84,7 @@ function setText(letter, spacing) {
 function draw() {
   stiffness: PARAMS.remap,
     background(255);
-  drawKeypoints();
+  // drawKeypoints();
   drawColision();
   textSize(40);
   // image(capture, 0, 0, 320, 240);
@@ -135,6 +137,6 @@ function writeLetter() {
   // console.log(textChain);
 }
 function mouseClicked() {
-  PARAMS.positionWord.init=false;
-  sendLastLetterPosition( PARAMS.textChain,  changeStateMachine());
+  PARAMS.positionWord.init = false;
+  sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
 }
