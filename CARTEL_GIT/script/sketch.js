@@ -33,6 +33,7 @@ function preload() {
 var video = document.createElement("video");
 var body = document.getElementsByTagName("body")[0];
 function setup() {
+  lexical();
   myWidth = windowWidth;
   myHeight = windowHeight;
   setDimensionParams(myWidth, myHeight)
@@ -47,7 +48,7 @@ function setup() {
   frameRate(fps);
 
   engine = Engine.create(
-    // {enableSleeping: true },
+    {enableSleeping: true },
   ) 
   world = engine.world;
   // noGravity();
@@ -84,11 +85,12 @@ function setText(letter, spacing) {
 function draw() {
   stiffness: PARAMS.remap,
     background(255);
-  // drawKeypoints();
+  drawKeypoints();
   drawColision();
   textSize(40);
   // image(capture, 0, 0, 320, 240);
   // image(video,0,0,myWidth,myHeight);
+  // image(video,0,0,100,100);
   if (PARAMS.posnet.model) {
     standardBloc();
     assignWordToLevel();
@@ -110,15 +112,15 @@ function introBloc(variable) {
   textSize(variable);
   headTypeChain.show();
 }
-function writeChaine() {
-  // for (let i = 0; i < PARAMS.word.length; i++) {
-  PARAMS.textChain.push([]);
+// function writeChaine() {
+//   // for (let i = 0; i < PARAMS.word.length; i++) {
+//   PARAMS.textChain.push([]);
 
-  for (let index = 0; index < PARAMS.word[0].length; index++) {
-    // PARAMS.textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
-    PARAMS.textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[0][index]));
-  }
-}
+//   for (let index = 0; index < PARAMS.word[0].length; index++) {
+//     // PARAMS.textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
+//     // PARAMS.textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 100, 100, PARAMS.word[0][index]));
+//   }
+// }
 function writeLetter() {
   let backLine = height / 3;
   let line = width - width / 2;

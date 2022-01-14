@@ -14,10 +14,3 @@ function  sendLastLetterPosition(physicLetter,level){
     }
   }
 // };
-function setUpWord(param) {
-  PARAMS.separateWords=PARAMS.word[0].split(' ');
-  for (let index = 0; index <PARAMS.separateWords.length; index++) {
-    PARAMS.wordRetriger.push(PARAMS.separateWords[index].split(''));
-    PARAMS.wordInterval.push(PARAMS.separateWords[index].length);
-  }
-}

@@ -12,11 +12,11 @@ let PARAMS = {
     },
     fontFam: null,
     font: {
-        bodyBox: 25,
+        bodyBox: 35,
         spacing: 0,
     },
     word: [
-        "une fleur aux soleil",
+        "Carte blanche à celles et ceux qui prennent soin de nous Avec la complicité de l’artiste Frantiček Klossner, des étudiantes et des étudiants en Soins infirmiers donnentlibre cours à leur créativité pour exprimer leurs expériences, émotions, espoirs et préoccupations. Leurs installations artistiques invitent à nous interroger sur les enjeux liés à la santé et aux soins aujourd’hui. Avec beaucoup d’authenticité,ces témoignages esthétiques rendent v",
         //   "une fleur voulait atteindre le soleil se haussait sur sa tige j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
         //   "une fleur voulait atteindre le soleil se haussait sur sa tige au détriment de sa corolle de ses feuilles et de son teint j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
     ],
@@ -53,24 +53,13 @@ let PARAMS = {
         },
         ease: 0,
     },
-    poeme: [
-        ["Si les poètes étaient moins bêtes"],
-        ["Et s'ils étaient moins paresseux"],
-        ["Ils rendraient tout le monde heureux"],
-
-        ["Pour pouvoir s'occuper en paix"],
-        ["De leurs souffrances littéraires"],
-        ["Ils construiraient des maisons jaunes"],
-        ["Avec des grands jardins devant"],
-        ["Et des arbres pleins de zoizeaux"],
-
-        ["Il y aurait de grands jets d'eau"],
-        ["Avec des lumières dedans"],
-        ["Il y aurait de l'air tout neuf"],
-        ["Parfumé de l'odeur des feuilles"],
-        ["On mangerait quand on voudrait"],
-        ["Et l'on travaillerait sans hâte"],
-    ]
+    poeme:
+        "Carte blanche à celles et ceux qui prennent soin de nous Avec la complicité de l’artiste Frantiček Klossner, des étudiantes et des étudiants en Soins infirmiers donnentlibre cours à leur créativité pour exprimer leurs expériences, émotions, espoirs et préoccupations. Leurs installations artistiques invitent à nous interroger sur les enjeux liés à la santé et aux soins aujourd’hui. Avec beaucoup d’authenticité,ces témoignages esthétiques rendent visible un engagement infirmier essentiel dans le contexte actuel.",
+    lexical:{
+        etude:[0,1,19,,22,27,34,36,45,48,55,65],
+        sante:[8,10,13,24,25,38,52,56,66],
+        art:[15,32,34,41,60,63,65],
+    }
 
 }
 

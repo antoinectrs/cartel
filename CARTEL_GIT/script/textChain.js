@@ -1,11 +1,11 @@
 function TextChain(x, y, w, h, letter) {
   var options = {
     friction: 0.5,
-    restitution: 0.9
+    restitution: 1
   };
   this.w = w;
   this.h = h;
-  this.ratio = 0.75;
+  this.ratio = 1.05;
   // this.fSize= fSize;
   this.pos;
   this.body = Bodies.rectangle(x, y, w, h, options);
@@ -24,7 +24,7 @@ function TextChain(x, y, w, h, letter) {
     // rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);
-    translate(-30 * this.ratio, -45 * this.ratio);
+    translate(-30 * this.ratio, -40 * this.ratio);
     text(letter, this.w, this.h)
     pop();
   };
