@@ -121,3 +121,7 @@ function drawColision() {
 function setRotation(index) {
   Matter.Body.setAngle(world.bodies[index], 0)
 }
+function newSetRotation(index) {
+  // console.log(world.bodies,world.bodies[index]);
+  Matter.Body.setAngle(world.bodies[index], 2)
+}

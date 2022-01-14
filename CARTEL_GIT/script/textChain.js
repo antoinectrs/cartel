@@ -22,10 +22,10 @@ function TextChain(x, y, w, h, letter) {
     rectMode(CENTER);
     strokeWeight(1);
     stroke(0);
-    rect(0, 0, this.w, this.h);
+    // rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);
-    translate(-30 * this.ratio, -40 * this.ratio);
+    translate(-14 * this.ratio, -17 * this.ratio);
     text(letter, this.w, this.h)
     pop();
   };

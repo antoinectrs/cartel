@@ -57,7 +57,8 @@ function setup() {
   const amp = 300;
 // bezier(1*amp, 3*amp,1*amp,0, 3*amp,0, 3*amp, 3*amp);
   // addTextChain('TEST', [1*amp, 3*amp,1*amp,0, 3*amp,0, 3*amp, 3*amp])
-  addTextChain('TEST', [3*amp,0, 3*amp, 3*amp,0,0,0, 3*amp])
+  const margin = 50;
+  addTextChain('TEST', [myWidth-margin,myHeight-100, myWidth-margin, -myHeight/4,margin,-myHeight/4,margin,  myHeight-100])
 
 
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
@@ -89,7 +90,7 @@ function setText(letter, spacing) {
 }
 
 function draw() {
-  // background(255);
+  background(255);
   // drawKeypoints();
   drawColision();
   // textSize(40);
@@ -145,10 +146,17 @@ function addTextChain(word, bezier) {
     //   line -= 2;
     // }
     // console.log("test",PARAMS.word[0]);
-    const results = getTextOnSpline("iubfwi uhwfhwefedede", bezier, { debug: PARAMS.debugMode, maxChar: 50 })
+    const results = getTextOnSpline(PARAMS.word[0], bezier, { debug: PARAMS.debugMode, maxChar: 180 })
     // console.log(results)
-    results.forEach(({ x, y, angle, char }) => {
-      PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
+    let index=0;
+    results.forEach(({ x, y, angle, char ,tab}) => {
+      if(tab!=true){
+        PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
+        newSetRotation(index);
+        index++
+      }
+    
+      
     })
  
     

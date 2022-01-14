@@ -39,7 +39,6 @@ function getTextOnSpline(textString, points, options = {}) {
 }
 
 function FillRibbon(text, Ribbon) {
-
     var textCurve = [];
     var ribbon = text.substring(0, Ribbon.maxChar);
     var curveSample = 1000;
@@ -54,18 +53,14 @@ function FillRibbon(text, Ribbon) {
             curve: c.curve
         });
     }
-
-    // letterPadding = drawingContext.measureText(" ").width / 4;
-    letterPadding=10
+    // letterPadding = drawingContext.measureText(" ").width /2;
+    letterPadding = 11;
     console.log(letterPadding);
     w = ribbon.length;
     ww = Math.round(drawingContext.measureText(ribbon).width);
-
-
     totalPadding = (w - 1) * letterPadding;
     totalLength = ww + totalPadding;
     p = 0;
-
     cDist = textCurve[curveSample - 1].curve.cDist;
 
     z = (cDist / 2) - (totalLength / 2);
@@ -83,12 +78,19 @@ function FillRibbon(text, Ribbon) {
         // ctx.save();
         // ctx.translate(textCurve[p].bezier.point.x, textCurve[p].bezier.point.y);
         // ctx.rotate(textCurve[p].curve.rad);
+        let tab=false;
+        if(ribbon[i]==" "){
+            tab=true;
+        }
         results.push({
             char: ribbon[i],
             x: textCurve[p].bezier.point.x,
             y: textCurve[p].bezier.point.y,
-            angle: textCurve[p].curve.rad
+            angle: textCurve[p].curve.rad,
+            tab:tab,
         })
+        
+        console.log(ribbon[i]==" ");
         // ctx.fillText(ribbon[i], 0, 0);
         // ctx.restore();
 
