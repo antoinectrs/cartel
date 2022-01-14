@@ -152,7 +152,7 @@ function addTextChain(word, bezier) {
     results.forEach(({ x, y, angle, char ,tab}) => {
       if(tab!=true){
         PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
-        newSetRotation(index);
+        newSetRotation(index,angle);
         index++
       }
     
