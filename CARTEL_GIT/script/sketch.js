@@ -43,17 +43,23 @@ function setup() {
   createCanvas(myWidth, myHeight);
   // Set text characteristics
   textFont(PARAMS.fontFam);
-  textSize(40);
+  textSize(20);
   textAlign(CENTER, CENTER);
   frameRate(fps);
 
   engine = Engine.create(
-    {enableSleeping: true },
-  ) 
+    { enableSleeping: true },
+  )
   world = engine.world;
-  // noGravity();
-  const sendLetter = [];
-  writeLetter();
+  noGravity();
+  // const sendLetter = [];
+
+  const amp = 300;
+// bezier(1*amp, 3*amp,1*amp,0, 3*amp,0, 3*amp, 3*amp);
+  // addTextChain('TEST', [1*amp, 3*amp,1*amp,0, 3*amp,0, 3*amp, 3*amp])
+  addTextChain('TEST', [3*amp,0, 3*amp, 3*amp,0,0,0, 3*amp])
+
+
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
@@ -83,11 +89,10 @@ function setText(letter, spacing) {
 }
 
 function draw() {
-  stiffness: PARAMS.remap,
-    background(255);
-  drawKeypoints();
+  // background(255);
+  // drawKeypoints();
   drawColision();
-  textSize(40);
+  // textSize(40);
   // image(capture, 0, 0, 320, 240);
   // image(video,0,0,myWidth,myHeight);
   // image(video,0,0,100,100);
@@ -95,6 +100,7 @@ function draw() {
     standardBloc();
     assignWordToLevel();
   }
+  
   rectMode(CENTER);
 }
 
@@ -102,6 +108,8 @@ function standardBloc() {
   for (let i = 0; i < PARAMS.textChain.length; i++) {
     for (var index = 0; index < PARAMS.textChain[i].length; index++) {
       PARAMS.textChain[i][index].show();
+
+
       // console.log(PARAMS.textChain[i][index]);
     }
   }
@@ -121,23 +129,65 @@ function introBloc(variable) {
 //     // PARAMS.textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 100, 100, PARAMS.word[0][index]));
 //   }
 // }
-function writeLetter() {
+
+// PARAMS.wordRetriger[i]
+function addTextChain(word, bezier) {
   let backLine = height / 3;
   let line = width - width / 2;
-  for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
+  // for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
+  for (let i = 0; i < 1; i++) {
     PARAMS.textChain.push([]);
-    for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
-      if (index % 20 == 0 && index != 0) {
-        backLine += 20;
-        line = width - width / 2;
-      } else {
-        line -= 2;
-      }
-      PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
-    }
+    // for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
+    // if (index % 20 == 0 && index != 0) {
+    //   backLine += 20;
+    //   line = width - width / 2;
+    // } else {
+    //   line -= 2;
+    // }
+    // console.log("test",PARAMS.word[0]);
+    const results = getTextOnSpline("iubfwi uhwfhwefedede", bezier, { debug: PARAMS.debugMode, maxChar: 50 })
+    // console.log(results)
+    results.forEach(({ x, y, angle, char }) => {
+      PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
+    })
+ 
+    
+    // PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
+    // }
   }
-  // console.log(textChain);
+  // PARAMS.textChain.push([]);
+  // const results = getTextOnSpline(word, bezier, { debug: PARAMS.debugMode, maxChar: 50 })
+  // console.log(results)
+  // results.forEach(({ x, y, angle, char }) => {
+  //   PARAMS.textChain[0].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
+  // })
 }
+// function addTextChain(word, bezier) {
+//   let backLine = height / 3;
+//   let line = width - width / 2;
+//   // for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
+//   for (let i = 0; i < 2; i++) {
+//     PARAMS.textChain.push([]);
+//     for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
+//       if (index % 20 == 0 && index != 0) {
+//         backLine += 20;
+//         line = width - width / 2;
+//       } else {
+//         line -= 2;
+//       }
+//       PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
+//     }
+//   }
+
+//   PARAMS.textChain.push([]);
+//   // const results = getTextOnSpline("test", [99.2, 177.2, 130.02, 60.0, 300.5, 276.2, 300.7, 176.2], { debug: true, maxChar: 100 })
+
+//   const results = getTextOnSpline(word, bezier, { debug: PARAMS.debugMode, maxChar: 50 })
+//   console.log(results)
+//   results.forEach(({ x, y, angle, char }) => {
+//     PARAMS.textChain[0].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
+//   })
+// }
 function mouseClicked() {
   PARAMS.positionWord.init = false;
   sendLastLetterPosition(PARAMS.textChain, changeStateMachine());

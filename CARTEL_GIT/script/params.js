@@ -1,4 +1,5 @@
 let PARAMS = {
+    debugMode: true,
     state: {
         intro: true,
         variableFont: 40,
@@ -12,7 +13,7 @@ let PARAMS = {
     },
     fontFam: null,
     font: {
-        bodyBox: 35,
+        bodyBox: 15,
         spacing: 0,
     },
     word: [
@@ -23,7 +24,7 @@ let PARAMS = {
     textChain: [],
     wordInterval: [0],
     separateWords: null,
-    wordRetriger: [],
+    // wordRetriger: [],
     headType: "0",
     physics: {
         bodyDeph: 50,
