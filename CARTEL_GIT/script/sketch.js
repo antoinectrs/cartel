@@ -154,12 +154,8 @@ function addTextChain(word, bezier) {
         PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
         newSetRotation(index,angle);
         index++
-      }
-    
-      
+      } 
     })
- 
-    
     // PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
     // }
   }
@@ -170,33 +166,8 @@ function addTextChain(word, bezier) {
   //   PARAMS.textChain[0].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
   // })
 }
-// function addTextChain(word, bezier) {
-//   let backLine = height / 3;
-//   let line = width - width / 2;
-//   // for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
-//   for (let i = 0; i < 2; i++) {
-//     PARAMS.textChain.push([]);
-//     for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
-//       if (index % 20 == 0 && index != 0) {
-//         backLine += 20;
-//         line = width - width / 2;
-//       } else {
-//         line -= 2;
-//       }
-//       PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
-//     }
-//   }
-
-//   PARAMS.textChain.push([]);
-//   // const results = getTextOnSpline("test", [99.2, 177.2, 130.02, 60.0, 300.5, 276.2, 300.7, 176.2], { debug: true, maxChar: 100 })
-
-//   const results = getTextOnSpline(word, bezier, { debug: PARAMS.debugMode, maxChar: 50 })
-//   console.log(results)
-//   results.forEach(({ x, y, angle, char }) => {
-//     PARAMS.textChain[0].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
-//   })
-// }
 function mouseClicked() {
   PARAMS.positionWord.init = false;
+  // console.log(s);
   sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
 }

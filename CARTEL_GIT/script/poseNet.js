@@ -15,7 +15,6 @@ function gotPoses(results) {
 function modelReady() {
   poseNet.multiPose(video);
   PARAMS.posnet.model = true;
-  console.log(PARAMS.posnet.model);
 }
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints() {

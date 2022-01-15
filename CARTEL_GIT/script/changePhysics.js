@@ -23,19 +23,21 @@ function fallNobody() {
 
 function assignWordToLevel() {
   switch (PARAMS.state.stateMachine) {
-    case 1: customEase(1);
+    case 1: 
+    // resetAnimation();
+    customEase(1);
       break;
     case 2:
       resetAnimation();
       customEase(2);
       break;
     case 3:
-      resetAnimation();
-      customEase(3);
+      // resetAnimation();
+      // customEase(3);
       break;
     case 4:
-      resetAnimation();
-      customEase(4);
+      // resetAnimation();
+      // customEase(4);
       // console.log(PARAMS.state.stateMachine);
       break;
     // default:
@@ -62,32 +64,30 @@ function customEase(WordMove) {
       setRotation(index);
     }
   }
-  // } else {
-  // PARAMS.positionWord.ease = 0;
-
-  // }
 }
 function setUpChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
-  // console.log(PARAMS.separateWords[WordMove].length);
-  // PARAMS.positionWord.p0.LastPosition
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+  // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
+   
     var options2 = {
-      bodyA: PARAMS.textChain[WordMove][index].body,
+      bodyA: PARAMS.textChain[0][index+originStartWord(WordMove)].body,
       pointB: { x: decay, y: height / 2 },
       // stiffness: 0.9,
       // friction: 0.9,
       length: PARAMS.positionWord.distCalcul[index],
     };
+
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
+    // console.log(originStartWord(WordMove),PARAMS.separateWords[WordMove].length,PARAMS.positionWord.DynamicLenght[index]);
+    console.log( PARAMS.textChain[0][index]);
     Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 
 }
 function removeChain(WordMove) {
-  console.log( PARAMS.separateWords[WordMove].length);
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true)
   }
@@ -122,6 +122,5 @@ function setRotation(index) {
   Matter.Body.setAngle(world.bodies[index], 0)
 }
 function newSetRotation(index,angle) {
-  // console.log(world.bodies,world.bodies[index]);
   Matter.Body.setAngle(world.bodies[index], angle)
 }

@@ -1,7 +1,4 @@
 // https://stackoverflow.com/questions/8974364/how-can-i-draw-a-text-along-arc-path-with-html-5-canvas
-
-// getTextOnSpline("test", [99.2, 177.2, 130.02, 60.0, 300.5, 276.2, 300.7, 176.2], {debug: true, maxChar: 100})
-
 function getTextOnSpline(textString, points, options = {}) {
     const Ribbon = {
         debug: true,
@@ -16,25 +13,12 @@ function getTextOnSpline(textString, points, options = {}) {
         endY: points[7],
         ...options
     };
-
     if (Ribbon.debug) {
         push()
         stroke('red');
         bezier(...points)
         pop()
     }
-
-    // ctx.save();
-    // ctx.beginPath();
-
-    // ctx.moveTo(Ribbon.startX, Ribbon.startY);
-    // ctx.bezierCurveTo(Ribbon.control1X, Ribbon.control1Y,
-    //     Ribbon.control2X, Ribbon.control2Y,
-    //     Ribbon.endX, Ribbon.endY);
-
-    // ctx.stroke();
-    // ctx.restore();
-
     return FillRibbon(textString, Ribbon);
 }
 
@@ -55,7 +39,6 @@ function FillRibbon(text, Ribbon) {
     }
     // letterPadding = drawingContext.measureText(" ").width /2;
     letterPadding = 11;
-    console.log(letterPadding);
     w = ribbon.length;
     ww = Math.round(drawingContext.measureText(ribbon).width);
     totalPadding = (w - 1) * letterPadding;
@@ -73,11 +56,7 @@ function FillRibbon(text, Ribbon) {
     }
 
     const results = []
-
     for (i = 0; i < w; i++) {
-        // ctx.save();
-        // ctx.translate(textCurve[p].bezier.point.x, textCurve[p].bezier.point.y);
-        // ctx.rotate(textCurve[p].curve.rad);
         let tab=false;
         if(ribbon[i]==" "){
             tab=true;
@@ -89,11 +68,6 @@ function FillRibbon(text, Ribbon) {
             angle: textCurve[p].curve.rad,
             tab:tab,
         })
-        
-        console.log(ribbon[i]==" ");
-        // ctx.fillText(ribbon[i], 0, 0);
-        // ctx.restore();
-
         x1 = drawingContext.measureText(ribbon[i]).width + letterPadding;
         x2 = 0;
         for (j = p; j < curveSample; j++) {
@@ -106,9 +80,7 @@ function FillRibbon(text, Ribbon) {
     }
 
     return results
-
     // textCurve()
-
 } //end FillRibon
 
 function _bezier(b1, b2) {
@@ -140,7 +112,6 @@ function bezier2(t, startX, startY, control1X, control1Y, control2X, control2Y, 
     this.x = ((1 - t) * this.Bezier1.x) + (t * this.Bezier2.x);
     this.y = ((1 - t) * this.Bezier1.y) + (t * this.Bezier2.y);
     this.slope = new bezierT(t, startX, startY, control1X, control1Y, control2X, control2Y, endX, endY);
-
     this.point = {
         t: t,
         x: this.x,
@@ -149,7 +120,6 @@ function bezier2(t, startX, startY, control1X, control1Y, control2X, control2Y, 
         mY: this.slope.my
     };
 }
-
 function bezier1(t, startX, startY, control1X, control1Y, control2X, control2Y) {
     //linear bezier curve plotter; used recursivly in the quadratic bezier curve calculation
     this.x = ((1 - t) * (1 - t) * startX) + (2 * (1 - t) * t * control1X) + (t * t * control2X);
