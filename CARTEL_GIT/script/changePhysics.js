@@ -23,21 +23,21 @@ function fallNobody() {
 
 function assignWordToLevel() {
   switch (PARAMS.state.stateMachine) {
-    case 1: 
-    // resetAnimation();
-    customEase(1);
+    case 1:
+      // resetAnimation();
+      customEase(1);
       break;
     case 2:
       resetAnimation();
       customEase(2);
       break;
     case 3:
-      // resetAnimation();
-      // customEase(3);
+      resetAnimation();
+      customEase(3);
       break;
     case 4:
-      // resetAnimation();
-      // customEase(4);
+      resetAnimation();
+      customEase(4);
       // console.log(PARAMS.state.stateMachine);
       break;
     // default:
@@ -53,39 +53,58 @@ function resetAnimation() {
 function customEase(WordMove) {
   // if (PARAMS.state.stateMachine == 1) {
   if (PARAMS.positionWord.ease == 0) {
-    setUpChain(WordMove - 1);
+    arcChain(WordMove - 1);
   }
   if (PARAMS.positionWord.ease <= 1) {
     drawKeypoints()
     PARAMS.positionWord.ease += 0.01;
     chainLenght();
   } else {
-    for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
-      setRotation(index);
+    // for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
+    //   setRotation(index);
+    // }
+    for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+      newSetRotation(index+ originStartWord(WordMove),  PARAMS.pointArc[index+ originStartWord(WordMove)].angle);
     }
   }
 }
 function setUpChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-  // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
+    // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
-   
+
     var options2 = {
-      bodyA: PARAMS.textChain[0][index+originStartWord(WordMove)].body,
+      bodyA: PARAMS.textChain[0][index + originStartWord(WordMove)].body,
       pointB: { x: decay, y: height / 2 },
       // stiffness: 0.9,
       // friction: 0.9,
       length: PARAMS.positionWord.distCalcul[index],
     };
-
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
-    // console.log(originStartWord(WordMove),PARAMS.separateWords[WordMove].length,PARAMS.positionWord.DynamicLenght[index]);
-    console.log( PARAMS.textChain[0][index]);
+    console.log(PARAMS.textChain[0][index]);
     Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
+}
+function arcChain(WordMove) {
+  PARAMS.positionWord.DynamicLenght = [];
+  for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+    // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
+    const decay = (width / 2) - index * 100;
+    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, PARAMS.pointArc[index+ originStartWord(WordMove)].x, PARAMS.pointArc[index+ originStartWord(WordMove)].y))
 
+    var options2 = {
+      bodyA: PARAMS.textChain[0][index + originStartWord(WordMove)].body,
+      pointB: { x: PARAMS.pointArc[index+ originStartWord(WordMove)].x, y: PARAMS.pointArc[index+ originStartWord(WordMove)].y },
+      // stiffness: 0.9,
+      // friction: 0.9,
+      length: PARAMS.positionWord.distCalcul[index+ originStartWord(WordMove)],
+    };
+    PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
+    // console.log(PARAMS.textChain[0][index]);
+    Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
+  }
 }
 function removeChain(WordMove) {
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
@@ -119,8 +138,9 @@ function drawColision() {
   rect(myWidth + deph / 2, myHeight / 2, deph, myHeight)
 }
 function setRotation(index) {
+
   Matter.Body.setAngle(world.bodies[index], 0)
 }
-function newSetRotation(index,angle) {
+function newSetRotation(index, angle) {
   Matter.Body.setAngle(world.bodies[index], angle)
 }

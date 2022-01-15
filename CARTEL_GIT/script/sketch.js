@@ -52,15 +52,9 @@ function setup() {
   )
   world = engine.world;
   noGravity();
-  // const sendLetter = [];
-
   const amp = 300;
-// bezier(1*amp, 3*amp,1*amp,0, 3*amp,0, 3*amp, 3*amp);
-  // addTextChain('TEST', [1*amp, 3*amp,1*amp,0, 3*amp,0, 3*amp, 3*amp])
   const margin = 50;
   addTextChain('TEST', [myWidth-margin,myHeight-100, myWidth-margin, -myHeight/4,margin,-myHeight/4,margin,  myHeight-100])
-
-
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
@@ -93,15 +87,10 @@ function draw() {
   background(255);
   // drawKeypoints();
   drawColision();
-  // textSize(40);
-  // image(capture, 0, 0, 320, 240);
-  // image(video,0,0,myWidth,myHeight);
-  // image(video,0,0,100,100);
   if (PARAMS.posnet.model) {
     standardBloc();
     assignWordToLevel();
   }
-  
   rectMode(CENTER);
 }
 
@@ -109,28 +98,13 @@ function standardBloc() {
   for (let i = 0; i < PARAMS.textChain.length; i++) {
     for (var index = 0; index < PARAMS.textChain[i].length; index++) {
       PARAMS.textChain[i][index].show();
-
-
-      // console.log(PARAMS.textChain[i][index]);
     }
   }
-  // console.log(world.bodies.length-4)
-  // console.log(world.bodies)
 }
 function introBloc(variable) {
   textSize(variable);
   headTypeChain.show();
 }
-// function writeChaine() {
-//   // for (let i = 0; i < PARAMS.word.length; i++) {
-//   PARAMS.textChain.push([]);
-
-//   for (let index = 0; index < PARAMS.word[0].length; index++) {
-//     // PARAMS.textChain[i].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 50, 50, PARAMS.word[i][index]));
-//     // PARAMS.textChain[0].push(new TextChain(width / 2 + 300 * index, height / 2 - index * 300, 100, 100, PARAMS.word[0][index]));
-//   }
-// }
-
 // PARAMS.wordRetriger[i]
 function addTextChain(word, bezier) {
   let backLine = height / 3;
@@ -138,36 +112,20 @@ function addTextChain(word, bezier) {
   // for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
   for (let i = 0; i < 1; i++) {
     PARAMS.textChain.push([]);
-    // for (let index = 0; index < PARAMS.wordRetriger[i].length; index++) {
-    // if (index % 20 == 0 && index != 0) {
-    //   backLine += 20;
-    //   line = width - width / 2;
-    // } else {
-    //   line -= 2;
-    // }
-    // console.log("test",PARAMS.word[0]);
     const results = getTextOnSpline(PARAMS.word[0], bezier, { debug: PARAMS.debugMode, maxChar: 180 })
-    // console.log(results)
     let index=0;
     results.forEach(({ x, y, angle, char ,tab}) => {
       if(tab!=true){
         PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
+        PARAMS.pointArc.push({x, y, angle});
         newSetRotation(index,angle);
         index++
       } 
+    
     })
-    // PARAMS.textChain[i].push(new TextChain(line, backLine, PARAMS.font.bodyBox, PARAMS.font.bodyBox, PARAMS.wordRetriger[i][index]));
-    // }
   }
-  // PARAMS.textChain.push([]);
-  // const results = getTextOnSpline(word, bezier, { debug: PARAMS.debugMode, maxChar: 50 })
-  // console.log(results)
-  // results.forEach(({ x, y, angle, char }) => {
-  //   PARAMS.textChain[0].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
-  // })
 }
 function mouseClicked() {
   PARAMS.positionWord.init = false;
-  // console.log(s);
   sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
 }

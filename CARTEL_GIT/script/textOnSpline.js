@@ -21,7 +21,6 @@ function getTextOnSpline(textString, points, options = {}) {
     }
     return FillRibbon(textString, Ribbon);
 }
-
 function FillRibbon(text, Ribbon) {
     var textCurve = [];
     var ribbon = text.substring(0, Ribbon.maxChar);

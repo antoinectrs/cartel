@@ -7,7 +7,6 @@ function LetterTemplate(path) {
     restitution: 0.5
   };
 }
-
 function Letter(world, x, y, input) {
   //this.body = Bodies.circle(x, y, 30, input.options);
   console.log(PARAMS.font.bodyBox);
@@ -19,17 +18,14 @@ function Letter(world, x, y, input) {
   this.show = function () {
     var pos = this.body.position;
     var angle = this.body.angle;
-
     push();
     translate(pos.x, pos.y);
     rotate(angle);
-
     stroke(0);
     // strokeWeight(1)
     //noStroke();
     // fill(0);
     noFill();
-
     rect(0, 0, 50, 50);
     noStroke();
     fill(0);

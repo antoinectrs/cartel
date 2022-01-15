@@ -22,6 +22,7 @@ let PARAMS = {
         //   "une fleur voulait atteindre le soleil se haussait sur sa tige au détriment de sa corolle de ses feuilles et de son teint j'irai dans le soleil se répétait la fleur jusqu'au jour où le vent lui fit perdre la tête"
     ],
     textChain: [],
+    pointArc: [],
     wordInterval: [0],
     separateWords: null,
     // wordRetriger: [],
@@ -29,19 +30,6 @@ let PARAMS = {
     physics: {
         bodyDeph: 50,
         gravityForce: 1,
-        //     bounds: null,
-        //     engine: null,
-        //     world: null,
-        //     ground: null,
-        //     ground2: null,
-        //     letterTemplates: {},
-        //     bodies:[],
-        //     bodiesMaxLength:100,
-        //     myWidth:null,
-        //     myHeight:null,
-        //     grav:null,
-        //     theta:null,
-        //     fps:30,
     },
     positionWord: {
         init: false,
