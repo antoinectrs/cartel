@@ -134,6 +134,9 @@ function mouseClicked() {
 
 }
 function changeStep(){
+  if( PARAMS.positionWord.finish==true){
   PARAMS.positionWord.init = false;
   sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
+
+  }
 }

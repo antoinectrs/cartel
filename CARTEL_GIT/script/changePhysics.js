@@ -23,6 +23,7 @@ function fallNobody() {
 
 function assignWordToLevel(state) {
   if (state == 1) {
+    resetAnimation(1);
     customEase(1);
   } else if (state > 1) {
     resetAnimation(state);
