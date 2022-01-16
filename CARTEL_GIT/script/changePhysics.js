@@ -47,7 +47,7 @@ function customEase(WordMove) {
   }
   if (PARAMS.positionWord.ease <= 1) {
     // drawKeypoints()
-    PARAMS.positionWord.ease += 0.01;
+    PARAMS.positionWord.ease += 0.05;
     chainLenght();
   } else {
     // console.log(PARAMS.separateWords[WordMove]);
@@ -78,15 +78,16 @@ function setUpChain(WordMove) {
 function arcChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+    const decayIndex =originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, PARAMS.pointArc[index + originStartWord(WordMove)].x, PARAMS.pointArc[index + originStartWord(WordMove)].y))
     var options2 = {
-      bodyA: PARAMS.textChain[0][index + originStartWord(WordMove)].body,
-      pointB: { x: PARAMS.pointArc[index + originStartWord(WordMove)].x, y: PARAMS.pointArc[index + originStartWord(WordMove)].y },
+      bodyA: PARAMS.textChain[0][decayIndex].body,
+      pointB: { x: PARAMS.pointArc[decayIndex].x, y: PARAMS.pointArc[decayIndex].y },
       // stiffness: 0.9,
       // friction: 0.9,
-      length: PARAMS.positionWord.distCalcul[index + originStartWord(WordMove)],
+      length: PARAMS.positionWord.distCalcul[decayIndex],
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
     // console.log(PARAMS.textChain[0][index]);

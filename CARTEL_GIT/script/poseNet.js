@@ -21,12 +21,12 @@ function drawKeypoints() {
   // Loop through all the poses detected
   if (PARAMS.posnet.poses.length == 1) {
     // for (let j = 0; j < 5; j += 1) {
-      // let keypoint = PARAMS.posnet.poses[0].pose.keypoints[j].position;
-      // Only draw an ellipse is the pose probability is bigger than 0.2
       if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.2) {
-        // console.log("test");
-       if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[0])<200){
-         console.log("test");
+      //  if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[0])<200){
+       if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine-1)])<100){
+        changeStep();
+        console.log(PARAMS.state.stateMachine);
+      // console.log(PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine-1)]);
        }
         drawMyHead(PARAMS.posnet.poses[0].pose.keypoints[0], 0, 0);
         changeGravity(PARAMS.posnet.poses[0].pose.keypoints[0].position,0,j)

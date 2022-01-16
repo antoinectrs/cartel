@@ -127,3 +127,7 @@ function mouseClicked() {
   PARAMS.positionWord.init = false;
   sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
 }
+function changeStep(){
+  PARAMS.positionWord.init = false;
+  sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
+}
