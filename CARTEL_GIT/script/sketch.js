@@ -95,11 +95,16 @@ function draw() {
 }
 
 function standardBloc() {
-  for (let i = 0; i < PARAMS.textChain.length; i++) {
-    for (var index = 0; index < PARAMS.textChain[i].length; index++) {
-      PARAMS.textChain[i][index].show();
+  // for (let i = 0; i < PARAMS.textChain.length; i++) {
+    for (var index = 0; index < PARAMS.textChain[0].length; index++) {
+      PARAMS.textChain[0][index].show();
+      // console.log(PARAMS.textChain[0][index].isFixed);
+      if(PARAMS.textChain[0][index].isFixed==true){
+        // console.log(PARAMS.textChain[0][index]);
+        newSetRotation(index, PARAMS.pointArc[index].angle);
+      }
     }
-  }
+  // }
 }
 function introBloc(variable) {
   textSize(variable);

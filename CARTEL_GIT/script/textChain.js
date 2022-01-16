@@ -3,6 +3,7 @@ function TextChain(x, y, w, h, letter) {
     friction: 0.5,
     restitution: 1
   };
+  this.isFixed=false;
   this.w = w;
   this.h = h;
   this.ratio = 1.05;

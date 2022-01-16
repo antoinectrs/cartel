@@ -57,10 +57,13 @@ function resetAnimation(WordMove) {
   }
 }
 function customEase(WordMove) {
-  WordMove=WordMove-1;
+  WordMove = WordMove - 1;
   // if (PARAMS.state.stateMachine == 1) {
   if (PARAMS.positionWord.ease == 0) {
     arcChain(WordMove);
+    for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+      PARAMS.textChain[0][index + originStartWord(WordMove)].isFixed=true
+    }
   }
   if (PARAMS.positionWord.ease <= 1) {
     drawKeypoints()
@@ -70,13 +73,10 @@ function customEase(WordMove) {
     //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
     // }
   } else {
-    // for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
-    //   setRotation(index);
+    // console.log(PARAMS.separateWords[WordMove]);
+    // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+    //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
     // }
-    console.log( PARAMS.separateWords[WordMove]);
-    for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-      newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
-    }
   }
 }
 function setUpChain(WordMove) {
@@ -120,7 +120,7 @@ function arcChain(WordMove) {
 function removeChain(WordMove) {
   // console.log(PARAMS.positionWord.DynamicLenght[index],index);
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-   
+
     Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true)
   }
 }
