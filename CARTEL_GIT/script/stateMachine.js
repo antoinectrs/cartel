@@ -1,5 +1,5 @@
 function changeStateMachine() {
-  if (PARAMS.state.stateMachine <=  PARAMS.separateWords.length ) {
+  if (PARAMS.state.stateMachine <  PARAMS.separateWords.length-1 ) {
     PARAMS.state.stateMachine++;
   } else {
     PARAMS.state.stateMachine = 0;

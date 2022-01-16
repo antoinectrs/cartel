@@ -44,15 +44,16 @@ function customEase(WordMove) {
   if (PARAMS.positionWord.ease == 0) {
     arcChain(WordMove);
     for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-      PARAMS.textChain[0][index + originStartWord(WordMove)].isFixed=true
+      PARAMS.textChain[0][index + originStartWord(WordMove)].isFixed=true;
     }
+    // console.log(PARAMS.textChain[0]);
   }
   if (PARAMS.positionWord.ease < 1) {
     // drawKeypoints()
     PARAMS.positionWord.ease += 0.05;
     chainLenght();
   } else if(PARAMS.positionWord.finish==false) {
-    console.log("finish ");
+    // console.log("finish ");
     PARAMS.positionWord.finish=true;
     // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
@@ -62,6 +63,7 @@ function customEase(WordMove) {
 function setUpChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+    console.log(index);
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, decay, height / 2))
@@ -74,17 +76,18 @@ function setUpChain(WordMove) {
       length: PARAMS.positionWord.distCalcul[index],
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
-    console.log(PARAMS.textChain[0][index]);
+    // console.log(PARAMS.textChain[0][index]);
     Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 }
 function arcChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    const decayIndex =originStartWord(WordMove)
+    console.log(index);
+    const decayIndex = index+ originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
-    const decay = (width / 2) - index * 100;
-    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, PARAMS.pointArc[index + originStartWord(WordMove)].x, PARAMS.pointArc[index + originStartWord(WordMove)].y))
+    // console.log(PARAMS.positionWord.LastPosition);
+    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, PARAMS.pointArc[decayIndex].x, PARAMS.pointArc[decayIndex].y))
     var options2 = {
       bodyA: PARAMS.textChain[0][decayIndex].body,
       pointB: { x: PARAMS.pointArc[decayIndex].x, y: PARAMS.pointArc[decayIndex].y },
@@ -93,7 +96,6 @@ function arcChain(WordMove) {
       length: PARAMS.positionWord.distCalcul[decayIndex],
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
-    // console.log(PARAMS.textChain[0][index]);
     Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
   }
 }
