@@ -85,9 +85,9 @@ function setText(letter, spacing) {
 
 function draw() {
   background(255);
-  // drawKeypoints();
-  drawColision();
+  // drawColision();
   if (PARAMS.posnet.model) {
+    drawKeypoints();
     standardBloc();
     assignWordToLevel();
   }
@@ -95,16 +95,10 @@ function draw() {
 }
 
 function standardBloc() {
-  // for (let i = 0; i < PARAMS.textChain.length; i++) {
     for (var index = 0; index < PARAMS.textChain[0].length; index++) {
       PARAMS.textChain[0][index].show();
-      // console.log(PARAMS.textChain[0][index].isFixed);
-      if(PARAMS.textChain[0][index].isFixed==true){
-        // console.log(PARAMS.textChain[0][index]);
-        newSetRotation(index, PARAMS.pointArc[index].angle);
-      }
+      if(PARAMS.textChain[0][index].isFixed==true)newSetRotation(index, PARAMS.pointArc[index].angle);
     }
-  // }
 }
 function introBloc(variable) {
   textSize(variable);
@@ -125,8 +119,7 @@ function addTextChain(word, bezier) {
         PARAMS.pointArc.push({x, y, angle});
         newSetRotation(index,angle);
         index++
-      } 
-    
+      }
     })
   }
 }

@@ -28,26 +28,6 @@ function assignWordToLevel() {
     resetAnimation(PARAMS.state.stateMachine);
     customEase(PARAMS.state.stateMachine);
   }
-  // switch (PARAMS.state.stateMachine) {
-  //   case 1:
-  //     // resetAnimation();
-  //     customEase(1);
-  //     break;
-  //   case 2:
-  //     resetAnimation();
-  //     customEase(2);
-  //     break;
-  //   case 3:
-  //     resetAnimation();
-  //     customEase(3);
-  //     break;
-  //   case 4:
-  //     resetAnimation();
-  //     customEase(4);
-  //     // console.log(PARAMS.state.stateMachine);
-  //     break;
-  //   // default:
-  // }
 }
 function resetAnimation(WordMove) {
   if (PARAMS.positionWord.init == false) {
@@ -66,12 +46,9 @@ function customEase(WordMove) {
     }
   }
   if (PARAMS.positionWord.ease <= 1) {
-    drawKeypoints()
+    // drawKeypoints()
     PARAMS.positionWord.ease += 0.01;
     chainLenght();
-    // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
-    // }
   } else {
     // console.log(PARAMS.separateWords[WordMove]);
     // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
@@ -104,7 +81,6 @@ function arcChain(WordMove) {
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, PARAMS.pointArc[index + originStartWord(WordMove)].x, PARAMS.pointArc[index + originStartWord(WordMove)].y))
-
     var options2 = {
       bodyA: PARAMS.textChain[0][index + originStartWord(WordMove)].body,
       pointB: { x: PARAMS.pointArc[index + originStartWord(WordMove)].x, y: PARAMS.pointArc[index + originStartWord(WordMove)].y },
@@ -120,7 +96,6 @@ function arcChain(WordMove) {
 function removeChain(WordMove) {
   // console.log(PARAMS.positionWord.DynamicLenght[index],index);
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-
     Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true)
   }
 }
