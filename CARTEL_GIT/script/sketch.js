@@ -36,7 +36,7 @@ function setup() {
   lexical();
   myWidth = windowWidth;
   myHeight = windowHeight;
-  setDimensionParams(myWidth, myHeight)
+  // setDimensionParams(myWidth, myHeight)
   video.width = myWidth;
   video.height = myHeight;
   body.appendChild(video);
@@ -87,9 +87,12 @@ function draw() {
   background(255);
   // drawColision();
   if (PARAMS.posnet.model) {
-    drawKeypoints();
+    // if( PARAMS.positionWord.finish){
+      drawKeypoints();
+    // }
+  
     standardBloc();
-    assignWordToLevel();
+    assignWordToLevel(PARAMS.state.stateMachine);
   }
   rectMode(CENTER);
 }
@@ -124,8 +127,11 @@ function addTextChain(word, bezier) {
   }
 }
 function mouseClicked() {
-  PARAMS.positionWord.init = false;
-  sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
+  if( PARAMS.positionWord.finish==true){
+    PARAMS.positionWord.init = false;
+    sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
+  }
+
 }
 function changeStep(){
   PARAMS.positionWord.init = false;

@@ -7,9 +7,9 @@ function changeStateMachine() {
   return PARAMS.state.stateMachine;
 }
 function sendLastLetterPosition(physicLetter, level) {
-  PARAMS.positionWord.p0.LastPosition = [];
+  PARAMS.positionWord.LastPosition = [];
   for (let i = 0; i < PARAMS.wordInterval[level]; i++) {
-    PARAMS.positionWord.p0.LastPosition.push(physicLetter[0][i].body)
+    PARAMS.positionWord.LastPosition.push(physicLetter[0][i].body)
   }
 }
 function originStartWord(level) {

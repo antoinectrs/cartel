@@ -21,12 +21,12 @@ function fallNobody() {
   }
 }
 
-function assignWordToLevel() {
-  if (PARAMS.state.stateMachine == 1) {
+function assignWordToLevel(state) {
+  if (state == 1) {
     customEase(1);
-  } else if (PARAMS.state.stateMachine > 1) {
-    resetAnimation(PARAMS.state.stateMachine);
-    customEase(PARAMS.state.stateMachine);
+  } else if (state > 1) {
+    resetAnimation(state);
+    customEase(state);
   }
 }
 function resetAnimation(WordMove) {
@@ -34,6 +34,7 @@ function resetAnimation(WordMove) {
     PARAMS.positionWord.ease = 0;
     // removeChain(WordMove); ----need to fixed
     PARAMS.positionWord.init = true;
+    PARAMS.positionWord.finish= false;
   }
 }
 function customEase(WordMove) {
@@ -45,12 +46,13 @@ function customEase(WordMove) {
       PARAMS.textChain[0][index + originStartWord(WordMove)].isFixed=true
     }
   }
-  if (PARAMS.positionWord.ease <= 1) {
+  if (PARAMS.positionWord.ease < 1) {
     // drawKeypoints()
     PARAMS.positionWord.ease += 0.05;
     chainLenght();
-  } else {
-    // console.log(PARAMS.separateWords[WordMove]);
+  } else if(PARAMS.positionWord.finish==false) {
+    console.log("finish ");
+    PARAMS.positionWord.finish=true;
     // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
     // }
@@ -61,7 +63,7 @@ function setUpChain(WordMove) {
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
-    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, decay, height / 2))
+    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, decay, height / 2))
 
     var options2 = {
       bodyA: PARAMS.textChain[0][index + originStartWord(WordMove)].body,
@@ -81,7 +83,7 @@ function arcChain(WordMove) {
     const decayIndex =originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
-    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.p0.LastPosition[index].position.x, PARAMS.positionWord.p0.LastPosition[index].position.y, PARAMS.pointArc[index + originStartWord(WordMove)].x, PARAMS.pointArc[index + originStartWord(WordMove)].y))
+    PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, PARAMS.pointArc[index + originStartWord(WordMove)].x, PARAMS.pointArc[index + originStartWord(WordMove)].y))
     var options2 = {
       bodyA: PARAMS.textChain[0][decayIndex].body,
       pointB: { x: PARAMS.pointArc[decayIndex].x, y: PARAMS.pointArc[decayIndex].y },
