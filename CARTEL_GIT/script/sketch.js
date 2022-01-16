@@ -51,7 +51,7 @@ function setup() {
     { enableSleeping: true },
   )
   world = engine.world;
-  noGravity();
+  // noGravity();
   const amp = 300;
   const margin = 50;
   addTextChain('TEST', [myWidth-margin,myHeight-100, myWidth-margin, -myHeight/4,margin,-myHeight/4,margin,  myHeight-100])

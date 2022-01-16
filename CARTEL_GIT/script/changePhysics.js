@@ -57,18 +57,23 @@ function resetAnimation(WordMove) {
   }
 }
 function customEase(WordMove) {
+  WordMove=WordMove-1;
   // if (PARAMS.state.stateMachine == 1) {
   if (PARAMS.positionWord.ease == 0) {
-    arcChain(WordMove - 1);
+    arcChain(WordMove);
   }
   if (PARAMS.positionWord.ease <= 1) {
     drawKeypoints()
     PARAMS.positionWord.ease += 0.01;
     chainLenght();
+    // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
+    //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
+    // }
   } else {
     // for (let index = PARAMS.wordInterval[WordMove - 1]; index < PARAMS.wordInterval[WordMove]; index++) {
     //   setRotation(index);
     // }
+    console.log( PARAMS.separateWords[WordMove]);
     for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
       newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
     }

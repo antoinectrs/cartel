@@ -22,7 +22,7 @@ function TextChain(x, y, w, h, letter) {
     rectMode(CENTER);
     strokeWeight(1);
     stroke(0);
-    // rect(0, 0, this.w, this.h);
+    rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);
     translate(-14 * this.ratio, -17 * this.ratio);
