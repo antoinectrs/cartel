@@ -83,11 +83,13 @@ function setUpChain(WordMove) {
 function arcChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    console.log(index);
+    // console.log(index);
     const decayIndex = index+ originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     // console.log(PARAMS.positionWord.LastPosition);
+    console.log(dist(PARAMS.positionWord.LastPosition[index].position.x, 0, PARAMS.pointArc[decayIndex].x,0));
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, PARAMS.pointArc[decayIndex].x, PARAMS.pointArc[decayIndex].y))
+    // PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, 0, PARAMS.pointArc[decayIndex].x,0))
     var options2 = {
       bodyA: PARAMS.textChain[0][decayIndex].body,
       pointB: { x: PARAMS.pointArc[decayIndex].x, y: PARAMS.pointArc[decayIndex].y },
