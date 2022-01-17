@@ -10,6 +10,7 @@ let PARAMS = {
         positionHead: null,
         poses: [],
         model: false,
+        hand:{x1:0,y1:0}
     },
     fontFam: null,
     font: {

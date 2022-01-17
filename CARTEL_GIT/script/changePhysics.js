@@ -63,7 +63,7 @@ function customEase(WordMove) {
 function setUpChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    console.log(index);
+    // console.log(index);
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     const decay = (width / 2) - index * 100;
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, decay, height / 2))
@@ -87,7 +87,6 @@ function arcChain(WordMove) {
     const decayIndex = index+ originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     // console.log(PARAMS.positionWord.LastPosition);
-    console.log(dist(PARAMS.positionWord.LastPosition[index].position.x, 0, PARAMS.pointArc[decayIndex].x,0));
     PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, PARAMS.positionWord.LastPosition[index].position.y, PARAMS.pointArc[decayIndex].x, PARAMS.pointArc[decayIndex].y))
     // PARAMS.positionWord.distCalcul.push(dist(PARAMS.positionWord.LastPosition[index].position.x, 0, PARAMS.pointArc[decayIndex].x,0))
     var options2 = {

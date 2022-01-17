@@ -48,13 +48,13 @@ function setup() {
   frameRate(fps);
 
   engine = Engine.create(
-    { enableSleeping: true },
+    // { enableSleeping: true },
   )
   world = engine.world;
   // noGravity();
   const amp = 300;
   const margin = 50;
-  addTextChain('TEST', [myWidth-margin,myHeight-100, myWidth-margin, -myHeight/4,margin,-myHeight/4,margin,  myHeight-100])
+  addTextChain('TEST', [myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
@@ -79,6 +79,7 @@ function setText(letter, spacing) {
   if (newBody.body) {
     bodies.push(newBody);
     bodiesUpdate();
+
   }
   return false;
 }
@@ -87,10 +88,16 @@ function draw() {
   background(255);
   // drawColision();
   if (PARAMS.posnet.model) {
-    // if( PARAMS.positionWord.finish){
-      drawKeypoints();
-    // }
-  
+    if (PARAMS.posnet.poses.length >= 1) {
+      if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.2) {
+        drawKeypoints();
+        changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[9].position.x - 50, PARAMS.posnet.poses[0].pose.keypoints[9].position.y - 50)
+       
+      }
+    } else if (PARAMS.state.oneUser) {
+      // fallNobody();
+    }
+    createBlurredEllipse(0);
     standardBloc();
     assignWordToLevel(PARAMS.state.stateMachine);
   }
@@ -98,10 +105,10 @@ function draw() {
 }
 
 function standardBloc() {
-    for (var index = 0; index < PARAMS.textChain[0].length; index++) {
-      PARAMS.textChain[0][index].show();
-      if(PARAMS.textChain[0][index].isFixed==true)newSetRotation(index, PARAMS.pointArc[index].angle);
-    }
+  for (var index = 0; index < PARAMS.textChain[0].length; index++) {
+    PARAMS.textChain[0][index].show();
+    if (PARAMS.textChain[0][index].isFixed == true) newSetRotation(index, PARAMS.pointArc[index].angle);
+  }
 }
 function introBloc(variable) {
   textSize(variable);
@@ -115,28 +122,28 @@ function addTextChain(word, bezier) {
   for (let i = 0; i < 1; i++) {
     PARAMS.textChain.push([]);
     const results = getTextOnSpline(PARAMS.word[0], bezier, { debug: PARAMS.debugMode, maxChar: 180 })
-    let index=0;
-    results.forEach(({ x, y, angle, char ,tab}) => {
-      if(tab!=true){
+    let index = 0;
+    results.forEach(({ x, y, angle, char, tab }) => {
+      if (tab != true) {
         PARAMS.textChain[i].push(new TextChain(x, y, PARAMS.font.bodyBox, PARAMS.font.bodyBox, char));
-        PARAMS.pointArc.push({x, y, angle});
-        newSetRotation(index,angle);
+        PARAMS.pointArc.push({ x, y, angle });
+        newSetRotation(index, angle);
         index++
       }
     })
   }
 }
 function mouseClicked() {
-  if( PARAMS.positionWord.finish==true){
+  if (PARAMS.positionWord.finish == true) {
     PARAMS.positionWord.init = false;
     sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
   }
 
 }
-function changeStep(){
-  if( PARAMS.positionWord.finish==true){
-  PARAMS.positionWord.init = false;
-  sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
+function changeStep() {
+  if (PARAMS.positionWord.finish == true) {
+    PARAMS.positionWord.init = false;
+    sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
 
   }
 }
