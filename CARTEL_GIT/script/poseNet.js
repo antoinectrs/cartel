@@ -23,7 +23,7 @@ function drawKeypoints() {
     // for (let j = 0; j < 5; j += 1) {
       if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.2) {
       //  if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[0])<200){
-       if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine-1)])<00){
+       if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine-1)])<100){
         changeStep();
         console.log(PARAMS.state.stateMachine);
       // console.log(PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine-1)]);

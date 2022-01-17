@@ -50,7 +50,7 @@ function customEase(WordMove) {
   }
   if (PARAMS.positionWord.ease < 1) {
     // drawKeypoints()
-    PARAMS.positionWord.ease += 0.05;
+    PARAMS.positionWord.ease += 0.02;
     chainLenght();
   } else if(PARAMS.positionWord.finish==false) {
     // console.log("finish ");
