@@ -7,6 +7,7 @@ let PARAMS = {
         stateMachine: 0,
     },
     posnet: {
+        headColider:null,
         positionHead: null,
         poses: [],
         model: false,

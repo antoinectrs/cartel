@@ -102,6 +102,11 @@ function changeEllipse(x,y) {
   PARAMS.posnet.hand.x1 = lerp( PARAMS.posnet.hand.x1, x, 0.08);
   PARAMS.posnet.hand.y1 = lerp( PARAMS.posnet.hand.y1, y, 0.08);
 
+  PARAMS.posnet.headColider.position.x= PARAMS.posnet.hand.x1;
+  PARAMS.posnet.headColider.position.y= PARAMS.posnet.hand.y1-200;
+  ellipse(PARAMS.posnet.headColider.position.x,PARAMS.posnet.headColider.position.y,100)
+  // console.log();
+
   // PARAMS.posnet.hand.x1 = x;
   // PARAMS.posnet.hand.y1 = y;
 }

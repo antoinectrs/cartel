@@ -55,6 +55,7 @@ function setup() {
   const amp = 300;
   const margin = 50;
   addTextChain('TEST', [myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
+  addHeadConstrain(myWidth/2,myHeight/2+200);
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
@@ -79,14 +80,13 @@ function setText(letter, spacing) {
   if (newBody.body) {
     bodies.push(newBody);
     bodiesUpdate();
-
   }
   return false;
 }
-
 function draw() {
   background(255);
   // drawColision();
+
   if (PARAMS.posnet.model) {
     if (PARAMS.posnet.poses.length >= 1) {
       // if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.1) {
@@ -98,10 +98,8 @@ function draw() {
       changeGravity(PARAMS.posnet.poses[0].pose.keypoints[0].position, 0,j)
     }
     //  else if (PARAMS.state.oneUser) {
-      // fallNobody();
     // }
     else {
-      // console.log("outside");
       fallNobody();
       changeEllipse(myWidth / 2, myHeight / 2 + 200);
     }
@@ -112,7 +110,6 @@ function draw() {
   }
   rectMode(CENTER);
 }
-
 function standardBloc() {
   for (var index = 0; index < PARAMS.textChain[0].length; index++) {
     PARAMS.textChain[0][index].show();
@@ -141,6 +138,11 @@ function addTextChain(word, bezier) {
       }
     })
   }
+}
+function addHeadConstrain(x,y){
+  PARAMS.posnet.headColider = Bodies.circle(x, y, 100);
+  Composite.add(world,  PARAMS.posnet.headColider);
+  
 }
 function mouseClicked() {
   if (PARAMS.positionWord.finish == true) {
