@@ -28,6 +28,7 @@ function assignWordToLevel(state) {
   } else if (state > 1) {
     resetAnimation(state);
     customEase(state);
+    console.log("inside");
   }
 }
 function resetAnimation(WordMove) {
