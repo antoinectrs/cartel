@@ -86,7 +86,6 @@ function setText(letter, spacing) {
 function draw() {
   background(255);
   // drawColision();
-
   if (PARAMS.posnet.model) {
     if (PARAMS.posnet.poses.length >= 1) {
       // if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.1) {
@@ -105,7 +104,11 @@ function draw() {
       removeChain();
       if( PARAMS.state.stateMachine!=0){
         PARAMS.state.stateMachine=0;
+        for (var index = 0; index < PARAMS.textChain[0].length; index++) {
+          PARAMS.textChain[0][index].isFixed = false
+        }
       }
+     
     }
     // console.log(PARAMS.posnet.poses.length);
     createBlurredEllipse(0);
