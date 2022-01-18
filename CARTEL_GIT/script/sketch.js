@@ -55,7 +55,7 @@ function setup() {
   const amp = 300;
   const margin = 50;
   addTextChain('TEST', [myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
-  addHeadConstrain(myWidth/2,myHeight/2+200);
+  // addHeadConstrain(myWidth/2,myHeight/2+200);
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
   ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
@@ -102,6 +102,10 @@ function draw() {
     else {
       fallNobody();
       changeEllipse(myWidth / 2, myHeight / 2 + 200);
+      removeChain();
+      if( PARAMS.state.stateMachine!=0){
+        PARAMS.state.stateMachine=0;
+      }
     }
     // console.log(PARAMS.posnet.poses.length);
     createBlurredEllipse(0);

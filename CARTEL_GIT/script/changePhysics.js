@@ -83,7 +83,7 @@ function setUpChain(WordMove) {
 function arcChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    // console.log(index);
+    console.log(index);
     const decayIndex = index+ originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     // console.log(PARAMS.positionWord.LastPosition);
@@ -98,13 +98,20 @@ function arcChain(WordMove) {
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
     Composite.add(world, PARAMS.positionWord.DynamicLenght[index]);
+    // Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true);
   }
 }
-function removeChain(WordMove) {
-  // console.log(PARAMS.positionWord.DynamicLenght[index],index);
-  for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true)
+function removeChain() {
+  for (let index = 0; index < Composite.allConstraints(world).length; index++) {
+    Composite.remove(world,Composite.allConstraints(world)[index]);
   }
+  // console.log(PARAMS.separateWords);
+  // console.log(PARAMS.positionWord.DynamicLenght[index],index);
+  // for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
+  //   // console.log(PARAMS.positionWord.DynamicLenght[index]);
+  //   Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true);
+  //   // console.log(PARAMS.positionWord.DynamicLenght);
+  // }
 }
 function chainLenght() {
   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
