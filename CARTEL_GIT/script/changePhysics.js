@@ -71,8 +71,7 @@ function setUpChain(WordMove) {
     var options2 = {
       bodyA: PARAMS.textChain[0][index + originStartWord(WordMove)].body,
       pointB: { x: decay, y: height / 2 },
-      // stiffness: 0.9,
-      // friction: 0.9,
+
       length: PARAMS.positionWord.distCalcul[index],
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
@@ -83,7 +82,6 @@ function setUpChain(WordMove) {
 function arcChain(WordMove) {
   PARAMS.positionWord.DynamicLenght = [];
   for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
-    console.log(index);
     const decayIndex = index+ originStartWord(WordMove)
     // for (let index = originStartWord(WordMove); index <PARAMS.separateWords[WordMove].length; index++) {
     // console.log(PARAMS.positionWord.LastPosition);
@@ -114,10 +112,14 @@ function removeChain() {
   // }
 }
 function chainLenght() {
-  console.log(PARAMS.positionWord.DynamicLenght.length);
   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
-    const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
-    PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
+    if( PARAMS.positionWord.ease<1 && PARAMS.positionWord.DynamicLenght[index].length!=0){
+      const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
+      PARAMS.positionWord.DynamicLenght[index].length = lerpLength;
+    }else{
+      PARAMS.positionWord.DynamicLenght[index].length =0;
+      console.log("in");
+    }
   }
 }
 function changeSizeIntro(headTypeChain, state, keyPoint) {

@@ -7,6 +7,7 @@ function changeStateMachine() {
   return PARAMS.state.stateMachine;
 }
 function sendLastLetterPosition(physicLetter, level) {
+  // console.log(physicLetter);
   PARAMS.positionWord.LastPosition = [];
   for (let i = 0; i < PARAMS.wordInterval[level]; i++) {
     PARAMS.positionWord.LastPosition.push(physicLetter[0][i].body)

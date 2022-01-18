@@ -1,7 +1,7 @@
 function TextChain(x, y, w, h, letter) {
   var options = {
-    friction: 0.5,
-    restitution: 1
+    friction: 10,
+    restitution: 0
   };
   this.isFixed=false;
   this.w = w;
@@ -24,7 +24,7 @@ function TextChain(x, y, w, h, letter) {
     rectMode(CENTER);
     strokeWeight(1);
     stroke(0);
-    // ellipse(0,0, this.w);
+    ellipse(0,0, this.w);
     // rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);
