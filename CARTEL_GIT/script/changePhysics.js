@@ -28,7 +28,6 @@ function assignWordToLevel(state) {
   } else if (state > 1) {
     resetAnimation(state);
     customEase(state);
-    console.log("inside");
   }
 }
 function resetAnimation(WordMove) {
@@ -51,7 +50,7 @@ function customEase(WordMove) {
   }
   if (PARAMS.positionWord.ease < 1) {
     // drawKeypoints()
-    PARAMS.positionWord.ease += 0.02;
+    PARAMS.positionWord.ease += 0.015;
     chainLenght();
   } else if(PARAMS.positionWord.finish==false) {
     // console.log("finish ");
@@ -115,6 +114,7 @@ function removeChain() {
   // }
 }
 function chainLenght() {
+  console.log(PARAMS.positionWord.DynamicLenght.length);
   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {
     const lerpLength = lerp(PARAMS.positionWord.distCalcul[index], 0, PARAMS.positionWord.ease);
     PARAMS.positionWord.DynamicLenght[index].length = lerpLength;

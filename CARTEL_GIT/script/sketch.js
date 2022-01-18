@@ -107,6 +107,7 @@ function draw() {
         for (var index = 0; index < PARAMS.textChain[0].length; index++) {
           PARAMS.textChain[0][index].isFixed = false
         }
+        PARAMS.positionWord.finish = true;
       }
      
     }
@@ -160,6 +161,7 @@ function mouseClicked() {
 }
 function changeStep() {
   if (PARAMS.positionWord.finish == true) {
+    console.log("inside");
     PARAMS.positionWord.init = false;
     sendLastLetterPosition(PARAMS.textChain, changeStateMachine());
 

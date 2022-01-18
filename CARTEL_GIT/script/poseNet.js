@@ -27,6 +27,7 @@ function drawKeypoints() {
       //  if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[0])<200){
       if (distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[10], PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine - 1)]) < 500) {
         changeStep();
+       
         // console.log(PARAMS.state.stateMachine);
         // console.log(PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine-1)]);
       // }
