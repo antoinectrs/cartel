@@ -94,7 +94,6 @@ function createBlurredEllipse(changecolor) {
  // noFill();
  stroke(0);
   strokeWeight(13);
-  
    ellipse(PARAMS.posnet.hand.x1 ,PARAMS.posnet.hand.y1-200, 100-variation*30, 100-variation*30);
   pop();
 

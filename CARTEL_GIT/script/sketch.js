@@ -95,8 +95,11 @@ function draw() {
         changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[0].position.x , PARAMS.posnet.poses[0].pose.keypoints[0].position.y )
       //  console.log(PARAMS.posnet.poses[0].pose.keypoints[9].position.x);
       // }
+    
     } else if (PARAMS.state.oneUser) {
       // fallNobody();
+    }else{
+      changeEllipse(myWidth/2 , myHeight/2+200);
     }
     createBlurredEllipse(0);
     standardBloc();
