@@ -7,7 +7,7 @@ function noGravity() {
 function changeGravity(keyPoint) {
   if (frameCount % 10 == 0) {
     const xMap = map(keyPoint.x, 0, myWidth, -PARAMS.physics.gravityForce, PARAMS.physics.gravityForce);
-    const yMap = map(keyPoint.y, 0, myHeight, -PARAMS.physics.gravityForce, PARAMS.physics.gravityForce);
+    const yMap = map(keyPoint.y, myHeight/2, myHeight, -PARAMS.physics.gravityForce, PARAMS.physics.gravityForce);
     engine.world.gravity.x = xMap;
     engine.world.gravity.y = yMap;
   }

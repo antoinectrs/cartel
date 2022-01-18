@@ -90,17 +90,22 @@ function draw() {
   if (PARAMS.posnet.model) {
     if (PARAMS.posnet.poses.length >= 1) {
       // if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.1) {
-        drawKeypoints();
-        // changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[9].position.x - 50, PARAMS.posnet.poses[0].pose.keypoints[9].position.y - 50)
-        changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[0].position.x , PARAMS.posnet.poses[0].pose.keypoints[0].position.y )
+      drawKeypoints();
+      // changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[9].position.x - 50, PARAMS.posnet.poses[0].pose.keypoints[9].position.y - 50)
+      changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[0].position.x, PARAMS.posnet.poses[0].pose.keypoints[0].position.y)
       //  console.log(PARAMS.posnet.poses[0].pose.keypoints[9].position.x);
       // }
-    
-    } else if (PARAMS.state.oneUser) {
-      // fallNobody();
-    }else{
-      changeEllipse(myWidth/2 , myHeight/2+200);
+      changeGravity(PARAMS.posnet.poses[0].pose.keypoints[0].position, 0,j)
     }
+    //  else if (PARAMS.state.oneUser) {
+      // fallNobody();
+    // }
+    else {
+      // console.log("outside");
+      fallNobody();
+      changeEllipse(myWidth / 2, myHeight / 2 + 200);
+    }
+    // console.log(PARAMS.posnet.poses.length);
     createBlurredEllipse(0);
     standardBloc();
     assignWordToLevel(PARAMS.state.stateMachine);
