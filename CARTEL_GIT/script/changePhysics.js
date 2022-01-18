@@ -133,7 +133,6 @@ function drawColision() {
   rect(myWidth + deph / 2, myHeight / 2, deph, myHeight)
 }
 function setRotation(index) {
-
   Matter.Body.setAngle(world.bodies[index], 0)
 }
 function newSetRotation(index, angle) {

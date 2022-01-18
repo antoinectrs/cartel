@@ -9,7 +9,8 @@ function TextChain(x, y, w, h, letter) {
   this.ratio = 1.05;
   // this.fSize= fSize;
   this.pos;
-  this.body = Bodies.rectangle(x, y, w, h, options);
+  // this.body = Bodies.rectangle(x, y, w, h, options);
+  this.body = Bodies.circle(x, y, w, options);
 
   this.textWorld = Composite.add(world, this.body);
 
@@ -23,6 +24,7 @@ function TextChain(x, y, w, h, letter) {
     rectMode(CENTER);
     strokeWeight(1);
     stroke(0);
+    // ellipse(0,0, this.w);
     // rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);
