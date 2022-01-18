@@ -89,11 +89,12 @@ function draw() {
   // drawColision();
   if (PARAMS.posnet.model) {
     if (PARAMS.posnet.poses.length >= 1) {
-      if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.2) {
+      // if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.1) {
         drawKeypoints();
-        changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[9].position.x - 50, PARAMS.posnet.poses[0].pose.keypoints[9].position.y - 50)
-       
-      }
+        // changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[9].position.x - 50, PARAMS.posnet.poses[0].pose.keypoints[9].position.y - 50)
+        changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[0].position.x , PARAMS.posnet.poses[0].pose.keypoints[0].position.y )
+      //  console.log(PARAMS.posnet.poses[0].pose.keypoints[9].position.x);
+      // }
     } else if (PARAMS.state.oneUser) {
       // fallNobody();
     }

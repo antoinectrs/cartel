@@ -10,6 +10,7 @@ const poseNet = ml5.poseNet(video, modelReady);
 poseNet.on("pose", gotPoses);
 // A function that gets called every time there's an update from the model
 function gotPoses(results) {
+  // console.log(results)
   PARAMS.posnet.poses = results;
 }
 function modelReady() {
@@ -71,14 +72,15 @@ function customSkeleton() {
   for (let i = 0; i < PARAMS.posnet.poses.length; i += 1) {
     // For every skeleton, loop through all body connections
     for (let j = 0; j < PARAMS.posnet.poses[0].skeleton.length; j += 1) {
-      // let partA = PARAMS.posnet.poses[0].skeleton[j][0];
-      // let partB = PARAMS.posnet.poses[0].skeleton[j][1];
-      // drawingContext.beginPath();
-      // drawingContext.moveTo(partA.position.x, partA.position.y);
-      // drawingContext.lineTo(partB.position.x, partB.position.y);
+      let partA = PARAMS.posnet.poses[0].skeleton[j][0];
+      let partB = PARAMS.posnet.poses[0].skeleton[j][1];
+      drawingContext.beginPath();
+      drawingContext.moveTo(partA.position.x, partA.position.y);
+      drawingContext.lineTo(partB.position.x, partB.position.y);
       // drawingContext.stroke();
       // console.log(PARAMS.posnet.poses[0].skeleton[j][0].part=="leftShoulder", j);
-      // circle(partA.position.x, partA.position.y, 20);
+      circle(partA.position.x, partA.position.y, 20);
+      // console.log(PARAMS.posnet.poses[0].skeleton[j][1]);
     }
     // const target= PARAMS.posnet.poses[0];
     // console.log(target);
@@ -92,11 +94,15 @@ function createBlurredEllipse(changecolor) {
  // noFill();
  stroke(0);
   strokeWeight(13);
-   ellipse(PARAMS.posnet.hand.x1 ,PARAMS.posnet.hand.y1, 100-variation*30, 100-variation*30);
+  
+   ellipse(PARAMS.posnet.hand.x1 ,PARAMS.posnet.hand.y1-200, 100-variation*30, 100-variation*30);
   pop();
 
 }
 function changeEllipse(x,y) {
-  PARAMS.posnet.hand.x1 = lerp( PARAMS.posnet.hand.x1, x, 0.03);
-  PARAMS.posnet.hand.y1 = lerp( PARAMS.posnet.hand.y1, y, 0.03);
+  PARAMS.posnet.hand.x1 = lerp( PARAMS.posnet.hand.x1, x, 0.08);
+  PARAMS.posnet.hand.y1 = lerp( PARAMS.posnet.hand.y1, y, 0.08);
+
+  // PARAMS.posnet.hand.x1 = x;
+  // PARAMS.posnet.hand.y1 = y;
 }
