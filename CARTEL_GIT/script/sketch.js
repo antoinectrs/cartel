@@ -105,7 +105,10 @@ function draw() {
       if( PARAMS.state.stateMachine!=0){
         PARAMS.state.stateMachine=0;
         for (var index = 0; index < PARAMS.textChain[0].length; index++) {
-          PARAMS.textChain[0][index].isFixed = false
+          if( PARAMS.textChain[0][index].isFixed == true){
+            PARAMS.textChain[0][index].isFixed = false
+            PARAMS.textChain[0][index].easeRotation=0;
+          }
         }
         PARAMS.positionWord.finish = true;
         PARAMS.positionWord.readyToRotate=false;
@@ -123,7 +126,13 @@ function standardBloc() {
   for (var index = 0; index < PARAMS.textChain[0].length; index++) {
     PARAMS.textChain[0][index].show();
     if(PARAMS.positionWord.readyToRotate==true && PARAMS.textChain[0][index].isFixed == true){
-      newSetRotation(index, PARAMS.pointArc[index].angle);
+      if( PARAMS.textChain[0][index].easeRotation<1){
+       const easeRot= lerp( PARAMS.textChain[0][index].body.angle,PARAMS.pointArc[index].angle, PARAMS.textChain[0][index].easeRotation)
+        newSetRotation(index,easeRot);
+        PARAMS.textChain[0][index].easeRotation+=0.01;
+      }else{
+        newSetRotation(index,PARAMS.pointArc[index].angle);
+      }
     }
   
   }

@@ -9,6 +9,7 @@ function TextChain(x, y, w, h, letter) {
   this.ratio = 1.05;
   // this.fSize= fSize;
   this.pos;
+  this.easeRotation=0;
   // this.body = Bodies.rectangle(x, y, w, h, options);
   this.body = Bodies.circle(x, y, w, options);
 
