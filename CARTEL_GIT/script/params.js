@@ -16,7 +16,7 @@ let PARAMS = {
     },
     fontFam: null,
     font: {
-        bodyBox: 15,
+        bodyBox: 40,
         spacing: 0,
     },
     word: [

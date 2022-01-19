@@ -26,7 +26,7 @@ function preload() {
     Body = Matter.Body,
     Constraint = Matter.Constraint;
 
-  PARAMS.fontFam = loadFont('assets/proto.otf');
+  PARAMS.fontFam = loadFont('assets/self.otf');
   setUpWord();
 
 }
@@ -43,7 +43,7 @@ function setup() {
   createCanvas(myWidth, myHeight);
   // Set text characteristics
   textFont(PARAMS.fontFam);
-  textSize(20);
+  textSize(50);
   textAlign(CENTER, CENTER);
   frameRate(fps);
 
