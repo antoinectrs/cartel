@@ -25,7 +25,7 @@ function TextChain(x, y, w, h, letter) {
     rectMode(CENTER);
     strokeWeight(1);
     stroke(0);
-    ellipse(0,0, this.w);
+    ellipse(0,0, this.w*1.4);
     // rect(0, 0, this.w, this.h);
     fill(0);
     scale(-1, 1);

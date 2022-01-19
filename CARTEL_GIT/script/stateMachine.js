@@ -6,6 +6,15 @@ function changeStateMachine() {
   }
   return PARAMS.state.stateMachine;
 }
+function changePhrase(phrase){
+  if(phrase<PARAMS.word.length-1){
+    phrase++;
+   
+  }else{
+    phrase=0;
+  }
+  return phrase;
+}
 function sendLastLetterPosition(physicLetter, level) {
   // console.log(physicLetter);
   PARAMS.positionWord.LastPosition = [];

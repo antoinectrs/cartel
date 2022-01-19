@@ -3,7 +3,7 @@ let Engine, Composite, World, Vertices, Body, Bodies, Constraint;
 let bounds;
 let engine;
 let world;
-let ground, ground2;
+let ground, ground2, ground3, ground4;
 
 let letterTemplates = {};
 let bodies = [];
@@ -27,7 +27,7 @@ function preload() {
     Constraint = Matter.Constraint;
 
   PARAMS.fontFam = loadFont('assets/self.otf');
-  setUpWord();
+  setUpWord(PARAMS.state.phrase);
 
 }
 var video = document.createElement("video");
@@ -43,7 +43,7 @@ function setup() {
   createCanvas(myWidth, myHeight);
   // Set text characteristics
   textFont(PARAMS.fontFam);
-  textSize(50);
+  textSize(40);
   textAlign(CENTER, CENTER);
   frameRate(fps);
 
@@ -54,7 +54,7 @@ function setup() {
   // noGravity();
   const amp = 300;
   const margin = 50;
-  addTextChain('TEST', [myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
+  addTextChain([myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
   // addHeadConstrain(myWidth/2,myHeight/2+200);
   ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
   ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
@@ -112,6 +112,14 @@ function draw() {
         }
         PARAMS.positionWord.finish = true;
         PARAMS.positionWord.readyToRotate=false;
+        removeAllBodies();
+        PARAMS.state.phrase=changePhrase( PARAMS.state.phrase);
+        PARAMS.textChain=[];
+        PARAMS.wordInterval=[0];
+        console.log(PARAMS.state.phrase);
+        setUpWord(PARAMS.state.phrase);
+        const margin = 50;
+        addTextChain([myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
       }
      
     }
@@ -142,13 +150,14 @@ function introBloc(variable) {
   headTypeChain.show();
 }
 // PARAMS.wordRetriger[i]
-function addTextChain(word, bezier) {
+function addTextChain(bezier) {
   let backLine = height / 3;
   let line = width - width / 2;
   // for (let i = 0; i < PARAMS.wordRetriger.length; i++) {
+ 
   for (let i = 0; i < 1; i++) {
     PARAMS.textChain.push([]);
-    const results = getTextOnSpline(PARAMS.word[0], bezier, { debug: PARAMS.debugMode, maxChar: 180 })
+    const results = getTextOnSpline(PARAMS.word[PARAMS.state.phrase], bezier, { debug: PARAMS.debugMode, maxChar: 180 })
     let index = 0;
     results.forEach(({ x, y, angle, char, tab }) => {
       if (tab != true) {

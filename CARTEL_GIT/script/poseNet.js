@@ -25,7 +25,7 @@ function drawKeypoints() {
     // for (let j = 0; j < 5; j += 1) {
     // if (PARAMS.posnet.poses[0].pose.keypoints[0].score > 0.2) {
       //  if(distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[0], PARAMS.pointArc[0])<200){
-      if (distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[10], PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine - 1)]) < 500) {
+      if (distBeetweenStep(PARAMS.posnet.poses[0].pose.keypoints[10], PARAMS.pointArc[originStartWord(PARAMS.state.stateMachine - 1)]) < 600) {
         changeStep();
        
         // console.log(PARAMS.state.stateMachine);
@@ -45,6 +45,7 @@ function drawKeypoints() {
 }
 function distBeetweenStep(keypoint, targetFix) {
   const noseToStep = dist(keypoint.position.x, 0, targetFix.x, 0);
+  // const noseToStep = dist(keypoint.position.x, keypoint.position.y, targetFix.x,targetFix.y, 0);
   return noseToStep;
 }
 function drawMyHead(keypoint, i, j) {

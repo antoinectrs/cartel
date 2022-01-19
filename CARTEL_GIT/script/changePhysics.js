@@ -94,8 +94,6 @@ function arcChain(WordMove) {
     var options2 = {
       bodyA: PARAMS.textChain[0][decayIndex].body,
       pointB: { x: PARAMS.pointArc[decayIndex].x, y: PARAMS.pointArc[decayIndex].y },
-      // stiffness: 0.9,
-      // friction: 0.9,
       length: PARAMS.positionWord.distCalcul[decayIndex],
     };
     PARAMS.positionWord.DynamicLenght.push(Constraint.create(options2));
@@ -114,6 +112,33 @@ function removeChain() {
   //   Composite.remove(world, PARAMS.positionWord.DynamicLenght[index], true);
   //   // console.log(PARAMS.positionWord.DynamicLenght);
   // }
+}
+function removeAllBodies() {
+  const before =  Composite.allBodies(world).length;
+  for (let index = 0; index < Composite.allBodies(world).length; index++) {
+    // Composite.remove(world,Composite.allConstraints(world)[index]);
+    // console.log(Composite.type(world)[index]);
+    // if(Composite.allBodies(world)[index].isStatic==false){
+      // Composite.allBodies(world)[index]
+      // console.log(indexs);
+      Composite.remove(world,Composite.allBodies(world)[index]);
+    // }
+    // else{
+    //       console.log(Composite.allBodies(world)[index]);
+    // }
+    // console.log("test",  Composite.allBodies(world).length);
+  }
+  console.log(before,  Composite.allBodies(world));
+  const margin = 50;
+  ground = Bodies.rectangle(myWidth / 2, myHeight + PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
+  ground2 = Bodies.rectangle(-PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
+  ground3 = Bodies.rectangle(myWidth / 2, -PARAMS.physics.bodyDeph / 2, myWidth, PARAMS.physics.bodyDeph, { isStatic: true });
+  ground4 = Bodies.rectangle(myWidth + PARAMS.physics.bodyDeph / 2, myHeight / 2, PARAMS.physics.bodyDeph, myHeight, { isStatic: true });
+  Composite.add(world, ground);
+  Composite.add(world, ground2);
+  Composite.add(world, ground3);
+  Composite.add(world, ground4);  
+
 }
 function chainLenght() {
   for (let index = 0; index < PARAMS.positionWord.DynamicLenght.length; index++) {

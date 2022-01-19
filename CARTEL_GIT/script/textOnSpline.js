@@ -37,7 +37,7 @@ function FillRibbon(text, Ribbon) {
         });
     }
     // letterPadding = drawingContext.measureText(" ").width /2;
-    letterPadding = 11;
+    letterPadding = 30;
     w = ribbon.length;
     ww = Math.round(drawingContext.measureText(ribbon).width);
     totalPadding = (w - 1) * letterPadding;
