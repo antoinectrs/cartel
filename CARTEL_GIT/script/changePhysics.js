@@ -55,6 +55,10 @@ function customEase(WordMove) {
   } else if(PARAMS.positionWord.finish==false) {
     // console.log("finish ");
     PARAMS.positionWord.finish=true;
+    if(PARAMS.state.stateMachine==PARAMS.separateWords.length-1){
+      console.log("finish");
+      PARAMS.positionWord.readyToRotate=true;
+    }
     // for (let index = 0; index < PARAMS.separateWords[WordMove].length; index++) {
     //   newSetRotation(index + originStartWord(WordMove), PARAMS.pointArc[index + originStartWord(WordMove)].angle);
     // }

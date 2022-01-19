@@ -108,6 +108,7 @@ function draw() {
           PARAMS.textChain[0][index].isFixed = false
         }
         PARAMS.positionWord.finish = true;
+        PARAMS.positionWord.readyToRotate=false;
       }
      
     }
@@ -121,7 +122,10 @@ function draw() {
 function standardBloc() {
   for (var index = 0; index < PARAMS.textChain[0].length; index++) {
     PARAMS.textChain[0][index].show();
-    // if (PARAMS.textChain[0][index].isFixed == true) newSetRotation(index, PARAMS.pointArc[index].angle);
+    if(PARAMS.positionWord.readyToRotate==true && PARAMS.textChain[0][index].isFixed == true){
+      newSetRotation(index, PARAMS.pointArc[index].angle);
+    }
+  
   }
 }
 function introBloc(variable) {

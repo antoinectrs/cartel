@@ -42,6 +42,7 @@ let PARAMS = {
         constraint: null,
         DynamicLenght: [],
         distCalcul: [],
+        readyToRotate:false,
         //x y target check setDimensionParams
         LastPosition: [],
 
