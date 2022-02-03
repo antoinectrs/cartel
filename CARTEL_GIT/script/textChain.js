@@ -6,12 +6,12 @@ function TextChain(x, y, w, h, letter) {
   this.isFixed=false;
   this.w = w;
   this.h = h;
-  this.ratio = 1.05;
+  // this.ratio = 1.05;
   // this.fSize= fSize;
   this.pos;
   this.easeRotation=0;
-  // this.body = Bodies.rectangle(x, y, w, h, options);
-  this.body = Bodies.circle(x, y, w, options);
+  this.body = Bodies.rectangle(x, y, w, h, options);
+  // this.body = Bodies.circle(x, y, w, options);
 
   this.textWorld = Composite.add(world, this.body);
 
@@ -25,11 +25,12 @@ function TextChain(x, y, w, h, letter) {
     rectMode(CENTER);
     strokeWeight(1);
     stroke(0);
-    ellipse(0,0, this.w*1.4);
-    // rect(0, 0, this.w, this.h);
+    // ellipse(0,0, this.w*1.4);
+    
+    // rect(0, 0, this.w, this.h);   //SHOW RECT UNCOMMENT
     fill(0);
     scale(-1, 1);
-    translate(-39 * this.ratio, -48 * this.ratio);
+    translate(-30 , -40 );
     text(letter, this.w, this.h)
     pop();
   };
