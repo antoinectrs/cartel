@@ -23,9 +23,7 @@ function setup() {
 
     mediaPipe.addEventListener('pose', (event) => {
         smoother.target(event.data.skeleton)
-        // const { data } = event
-        // skeleton.update(data.skeleton)
-        // normalSkeleton.update(data.skeletonNormalized)
+
     })
 }
 
