@@ -103,7 +103,7 @@ function draw() {
   // drawColision();
 
   push();
-  image(video, 0, 0)
+  // image(video, 0, 0)
   const pose = smoother.smoothDamp() // or smoother.lerp()
   skeleton.update(pose)
   skeleton.show(drawingContext, { color: 'red' })
@@ -117,18 +117,20 @@ function draw() {
     circleMenu.positionToCenter();
   }
  
+  // circleMenu.show();
+  // push();
+  
+ 
   circleMenu.show();
+  // pop();
  
   if (PARAMS.posnet.model) {
     if (PARAMS.posnet.poses.length >= 1) {
-
-
       changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[0].position.x, PARAMS.posnet.poses[0].pose.keypoints[0].position.y)
       //  console.log(PARAMS.posnet.poses[0].pose.keypoints[9].position.x);
       // }
       changeGravity(PARAMS.posnet.poses[0].pose.keypoints[0].position, 0, j)
     }
-
     else {
       fallNobody();
       changeEllipse(myWidth / 2, myHeight / 2 + 200);
@@ -147,14 +149,12 @@ function draw() {
         PARAMS.state.phrase = changePhrase(PARAMS.state.phrase);
         PARAMS.textChain = [];
         PARAMS.wordInterval = [0];
-        console.log(PARAMS.state.phrase);
+        // console.log(PARAMS.state.phrase);
         setUpWord(PARAMS.state.phrase);
         const margin = 50;
         addTextChain([myWidth - margin, myHeight - 100, myWidth - margin, -myHeight / 4, margin, -myHeight / 4, margin, myHeight - 100])
       }
-
     }
-
     createBlurredEllipse(0);
     standardBloc();
     assignWordToLevel(PARAMS.state.stateMachine);
