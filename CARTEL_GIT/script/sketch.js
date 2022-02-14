@@ -114,21 +114,16 @@ function draw() {
     // ellipse(pose.NOSE.x*width,200,200)
     // console.log(pose.NOSE.x);
   }else{
+    fallNobody();
     circleMenu.positionToCenter();
   }
- 
-  // circleMenu.show();
-  // push();
-  
- 
+  standardBloc();
   circleMenu.show();
   // pop();
  
   if (PARAMS.posnet.model) {
     if (PARAMS.posnet.poses.length >= 1) {
       changeEllipse(PARAMS.posnet.poses[0].pose.keypoints[0].position.x, PARAMS.posnet.poses[0].pose.keypoints[0].position.y)
-      //  console.log(PARAMS.posnet.poses[0].pose.keypoints[9].position.x);
-      // }
       changeGravity(PARAMS.posnet.poses[0].pose.keypoints[0].position, 0, j)
     }
     else {

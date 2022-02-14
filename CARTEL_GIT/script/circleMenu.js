@@ -30,23 +30,19 @@ class CircleMenu {
     //     pop();
     // }
     show() {
-
-  
         textAlign(CENTER);
-        textSize(48)
+        textSize(44.5)
         translate(this.lastPosition.x, this.lastPosition.y);
-
         // Draw a a circle with radius r
         noFill();
         noStroke();
         ellipse(0, 0, this.r * 2, this.r * 2);
-
         // current distance around the circle
         let arcLength = 0;
         // total number of radians that the text will consume
         let totalAngle = textWidth(this.str) / this.r;
         // iterate over each individual character in the String
-        rotate(2);
+        rotate(1.9);
         for (let i = 0; i < 60; i++) {
             let currentChar = this.str.charAt(i);
             this.w = textWidth(currentChar);
@@ -60,6 +56,13 @@ class CircleMenu {
             pop();
             arcLength += this.w / 2;
         }
+        this.drawAxis();
     }
+    drawAxis() {
+        stroke(255, 0, 0);
+        line(0, 0, 20, 0);
+        stroke(0, 255, 0);
+        line(0, 0, 0, 20);
+      }
 }
 
