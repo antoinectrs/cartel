@@ -31,14 +31,14 @@ let video;
 function setup() {
   pixelDensity(1);
   angleMode(RADIANS);
-  const canvas = createCanvas(800, 600);
+  const canvas = createCanvas(window.innerWidth, window.innerHeight);
 
   //------  VIDEO  ------
   video = createVideo()
   mediaPipe.addEventListener('setup', () => {
     const videoElem = mediaPipe.video
     video = new p5.MediaElement(videoElem)
-    resizeCanvas(videoElem.width, videoElem.height)
+    resizeCanvas(window.innerWidth, window.innerHeight)
   })
   mediaPipe.addEventListener('pose', (event) => {
     smoother.target(event.data.skeleton)
@@ -67,10 +67,10 @@ function setup() {
   });
   World.add(engine.world, attractor);
 
-  wallBottom = Bodies.rectangle(window.innerWidth/2, window.innerHeight-250, window.innerWidth, 50, { isStatic: true });
-  wallRight = Bodies.rectangle(100, window.innerHeight / 2, 50, window.innerHeight, { isStatic: true });
+  wallBottom = Bodies.rectangle(window.innerWidth/2, window.innerHeight+50/2, window.innerWidth, 50, { isStatic: true });
+  wallRight = Bodies.rectangle(-50/2, window.innerHeight / 2, 50, window.innerHeight, { isStatic: true });
   wallTop = Bodies.rectangle(window.innerWidth/2, -50 / 2, window.innerWidth, 50, { isStatic: true });
-  wallLeft = Bodies.rectangle(window.innerWidth-320, window.innerHeight / 2, 50, window.innerHeight, { isStatic: true });
+  wallLeft = Bodies.rectangle(window.innerWidth, window.innerHeight / 2, 50/2, window.innerHeight, { isStatic: true });
   // wall = Bodies.rectangle( window.innerWidth/2,  window.innerHeight/2, window.innerWidth, window.innerHeight, {
   //   isStatic: true,
   // });
@@ -135,6 +135,9 @@ function draw() {
   // drawBodies(boxes.bodies);
   // drawBody(attractor);
   drawBody(wallLeft);
+  drawBody(wallRight);
+  drawBody(wallTop);
+  drawBody(wallBottom);
   // noLoop()
 }
 function mouseClicked(){
