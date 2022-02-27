@@ -16,6 +16,7 @@ class MenuCircle {
         this.lastPosition.y = lerp(this.lastPosition.y, myHeight / 2, 0.08);
     }
     show() {
+        push();
         textAlign(CENTER);
         textSize(44.5)
         translate(this.lastPosition.x, this.lastPosition.y);
@@ -44,6 +45,7 @@ class MenuCircle {
             arcLength += this.w / 2;
         }
         // this.drawAxis();
+        pop();
     }
  
     drawAxis() {

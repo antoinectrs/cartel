@@ -17,7 +17,7 @@ const drawBody = Helpers.drawBody;
 const drawBodies = Helpers.drawBodies;
 
 let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle;
-let activePosition=[];
+let activePosition = [];
 const skeleton = new Skeleton()
 const smoother = new MediaPipeSmoothPose({
   lerpAmount: 0.33, // range [0-1], 0 is slowest
@@ -76,7 +76,7 @@ function setup() {
   // xx, yy, columns, rows, columnGap, rowGap
   boxes = Composites.stack(width / 2, 0, 3, 40, 3, 3, function (x, y) {
     return Bodies.circle(x, y, 10, {
-      // mass:  20,
+      mass:  2,
     });
 
   });
@@ -87,10 +87,9 @@ function setup() {
   // CIRCLE MENU
   menuCircle = new MenuCircle;
   //ACTIVE POSITION ---------   LISSAGE DES VALEURS DE POSITION.JS
-  const simplify=  5;
+  const simplify = 5;
   for (let index = 0; index < position[0].length; index++) {
-    // console.log(position[0][index].x, );
-    activePosition.push(new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify,Math.ceil(position[0][index].y / simplify) * simplify));
+    activePosition.push(new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify));
   }
 }
 
@@ -101,19 +100,30 @@ function draw() {
   // image(video, 0, 0)
   //------ BODY DETECTION -------
   const pose = smoother.smoothDamp() // or smoother.lerp()
-  skeleton.update(pose)
+  skeleton.update(pose);
   if (pose !== undefined) {
     skeleton.show(drawingContext, { color: 'red' });
     Body.translate(attractor, {
       x: (pose.RIGHT_INDEX.x * width - attractor.position.x) * 0.25,
       y: (pose.RIGHT_INDEX.y * height - attractor.position.y) * 0.25,
     });
-    // menuCircle.positionMove(actualPosition.x, actualPosition.y)
+
+    //------ CIRCLE MENU -------
     menuCircle.positionMove(pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height);
-    // ellipse(pose.RIGHT_INDEX.x * width, 30)
-    //------ CIRCLE MENU -------
     menuCircle.show();
-    //------ CIRCLE MENU -------
+
+    //------ END CIRCLE MENU -------
+  
+    //------ CHECK DISTANCE TO POINT -------
+    // fill(255,255,0)
+    // ellipse(activePosition[index].position.x, activePosition[index].position.y,pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y)
+    for (let index = 0; index < position[0].length; index++) {
+      if (activePosition[index].touch == false) {
+        activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y,pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y* height, 100);
+      }
+      activePosition[index].showActualPoint();
+    }
+    //------ END CHECK DISTANCE TO POINT -------
   } else {
     Body.translate(attractor, {
       x: (width / 2 - attractor.position.x) * 0.25,
@@ -122,7 +132,6 @@ function draw() {
   }
   pop();
   //------ END BODY DETECTION -------
-
   stroke(0);
   strokeWeight(1);
   // fill(0);
@@ -145,21 +154,17 @@ function draw() {
   // drawBody(wallBottom);
   //------ END PHYSIC LETTERS -------
 
-  //------ POINT LETTERS -------
-  for (let index = 0; index < position[0].length; index++) {
-    activePosition[index].showActualPoint();
-  }
-  //------ POINT LETTERS -------
 
   // noLoop()
   if (mouseIsPressed) {
-    fill(0)  
+    fill(0)
     // console.log(   activePosition);
     // activePosition.showActualPoint()
-    for (let index = 0; index < position[0].length; index++) {
-    // console.log(index);
-      activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y,width-mouseX,mouseY, 100);
-    }
+    // for (let index = 0; index < position[0].length; index++) {
+    //   if (activePosition[index].touch == false) {
+    //     activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, width - mouseX, mouseY, 100);
+    //   }
+    // }
     // activePosition.checkDistance(width - mouseX, mouseY, 30)
     // noLoop()
     // console.log(boxes.bodies[0].mass)
