@@ -16,7 +16,7 @@ const Composites = Matter.Composites;
 const drawBody = Helpers.drawBody;
 const drawBodies = Helpers.drawBodies;
 
-let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle;
+let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle,activePosition;
 const skeleton = new Skeleton()
 const smoother = new MediaPipeSmoothPose({
   lerpAmount: 0.33, // range [0-1], 0 is slowest
@@ -74,8 +74,10 @@ function setup() {
   // add boxes
   // xx, yy, columns, rows, columnGap, rowGap
   boxes = Composites.stack(width / 2, 0, 3, 40, 3, 3, function (x, y) {
-    return Bodies.circle(x, y, 10);
-    console.log("object");
+    return Bodies.circle(x, y, 10,{
+      // mass:  20,
+    });
+
   });
   World.add(engine.world, boxes);
   // run the engine
@@ -83,6 +85,8 @@ function setup() {
 
   // CIRCLE MENU
   menuCircle = new MenuCircle;
+  //ACTIVE POSITION
+  activePosition = new ActivePosition;
 }
 
 function draw() {
@@ -130,14 +134,22 @@ function draw() {
   }
   // drawBodies(boxes.bodies);
   // drawBody(attractor);
-  drawBody(wallLeft);
-  drawBody(wallRight);
-  drawBody(wallTop);
-  drawBody(wallBottom);
+  // drawBody(wallLeft);
+  // drawBody(wallRight);
+  // drawBody(wallTop);
+  // drawBody(wallBottom);
   //------ END PHYSIC LETTERS -------
 
-  // noLoop()
-}
-function mouseClicked() {
+    //------ POINT LETTERS -------
 
+      //------ POINT LETTERS -------
+
+  // noLoop()
+  if(mouseIsPressed){
+    fill(0)
+      // activePosition.showActualPoint()
+      activePosition.checkDistance(width-mouseX,mouseY,30)
+      // noLoop()
+      console.log(boxes.bodies[0].mass)
+  }
 }

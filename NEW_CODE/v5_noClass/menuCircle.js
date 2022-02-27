@@ -45,6 +45,7 @@ class MenuCircle {
         }
         // this.drawAxis();
     }
+ 
     drawAxis() {
         stroke(255, 0, 0);
         line(0, 0, 20, 0);
