@@ -76,7 +76,7 @@ function setup() {
   // xx, yy, columns, rows, columnGap, rowGap
   boxes = Composites.stack(width / 2, 0, 3, 40, 3, 3, function (x, y) {
     return Bodies.circle(x, y, 10, {
-      mass:  2,
+      mass: 2,
     });
 
   });
@@ -96,7 +96,6 @@ function setup() {
 function draw() {
   background(255);
   push();
-  // background(255,2);
   // image(video, 0, 0)
   //------ BODY DETECTION -------
   const pose = smoother.smoothDamp() // or smoother.lerp()
@@ -107,23 +106,16 @@ function draw() {
       x: (pose.RIGHT_INDEX.x * width - attractor.position.x) * 0.25,
       y: (pose.RIGHT_INDEX.y * height - attractor.position.y) * 0.25,
     });
-
     //------ CIRCLE MENU -------
     menuCircle.positionMove(pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height);
     menuCircle.show();
-
-    //------ END CIRCLE MENU -------
-  
     //------ CHECK DISTANCE TO POINT -------
-    // fill(255,255,0)
-    // ellipse(activePosition[index].position.x, activePosition[index].position.y,pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y)
     for (let index = 0; index < position[0].length; index++) {
       if (activePosition[index].touch == false) {
-        activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y,pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y* height, 100);
+        activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height, 100);
       }
       activePosition[index].showActualPoint();
     }
-    //------ END CHECK DISTANCE TO POINT -------
   } else {
     Body.translate(attractor, {
       x: (width / 2 - attractor.position.x) * 0.25,
@@ -157,16 +149,9 @@ function draw() {
 
   // noLoop()
   if (mouseIsPressed) {
-    fill(0)
-    // console.log(   activePosition);
-    // activePosition.showActualPoint()
-    // for (let index = 0; index < position[0].length; index++) {
-    //   if (activePosition[index].touch == false) {
-    //     activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, width - mouseX, mouseY, 100);
-    //   }
-    // }
-    // activePosition.checkDistance(width - mouseX, mouseY, 30)
-    // noLoop()
+    for (let index = 0; index < boxes.bodies.length; index++) {
+      boxes.bodies[index].isSleeping = true
+    }
     // console.log(boxes.bodies[0].mass)
   }
 }
