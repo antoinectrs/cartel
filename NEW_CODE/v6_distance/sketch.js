@@ -35,14 +35,13 @@ function setup() {
   video = createVideo()
   mediaPipe.addEventListener('setup', () => {
     const videoElem = mediaPipe.video
-    video = new p5.MediaElement(videoElem)
-    resizeCanvas(window.innerWidth, window.innerHeight)
+    video = new p5.MediaElement(videoElem);
+    resizeCanvas(window.innerWidth, window.innerHeight);
   })
   mediaPipe.addEventListener('pose', (event) => {
     smoother.target(event.data.skeleton)
   })
   //------  VIDEO  ------
-
   // create an engine
   engine = Engine.create();
   // no gravity
@@ -82,7 +81,9 @@ function setup() {
   });
   World.add(engine.world, boxes);
   // run the engine
-  Engine.run(engine);
+  // Engine.run(engine);
+  waitToRun();
+  // console.log(smoother.smoothDamp());
 
   // CIRCLE MENU
   menuCircle = new MenuCircle;
@@ -149,9 +150,32 @@ function draw() {
 
   // noLoop()
   if (mouseIsPressed) {
+    // console.log(boxes.bodies.length);
+    console.log("boxes: "+boxes.bodies.length+" points "+activePosition.length);
     for (let index = 0; index < boxes.bodies.length; index++) {
-      boxes.bodies[index].isSleeping = true
+      boxes.bodies[index].isSleeping = true;
+
     }
     // console.log(boxes.bodies[0].mass)
   }
+}
+
+function resolveAfter2Seconds(x) {
+  return new Promise(resolve => {
+    // setTimeout(() => {
+    //   // resolve(x);
+    //   Engine.run(engine);
+    // }, 5000);
+    const interval = setInterval(() => {
+      if (smoother.smoothDamp()!=undefined) {
+        resolve('foo');
+        clearInterval(interval);
+      };
+    }, 1000);
+  });
+}
+
+async function waitToRun() {
+  var x = await resolveAfter2Seconds();
+  Engine.run(engine)
 }
