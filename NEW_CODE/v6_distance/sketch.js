@@ -16,7 +16,7 @@ const Composites = Matter.Composites;
 const drawBody = Helpers.drawBody;
 const drawBodies = Helpers.drawBodies;
 
-let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle;
+let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle,amount,step;
 let activePosition = [];
 const skeleton = new Skeleton()
 const smoother = new MediaPipeSmoothPose({
@@ -64,9 +64,6 @@ function setup() {
   wallRight = Bodies.rectangle(-50 / 2, window.innerHeight / 2, 50, window.innerHeight, { isStatic: true });
   wallTop = Bodies.rectangle(window.innerWidth / 2, -50 / 2, window.innerWidth, 50, { isStatic: true });
   wallLeft = Bodies.rectangle(window.innerWidth, window.innerHeight / 2, 50 / 2, window.innerHeight, { isStatic: true });
-  // wall = Bodies.rectangle( window.innerWidth/2,  window.innerHeight/2, window.innerWidth, window.innerHeight, {
-  //   isStatic: true,
-  // });
   World.add(engine.world, wallLeft);
   World.add(engine.world, wallBottom);
   World.add(engine.world, wallTop);
@@ -77,14 +74,14 @@ function setup() {
     return Bodies.circle(x, y, 10, {
       mass: 2,
     });
-
   });
+  // VECTOR SET UP
+  step = -0.01;
+  amount=1;
+
   World.add(engine.world, boxes);
   // run the engine
-  // Engine.run(engine);
   waitToRun();
-  // console.log(smoother.smoothDamp());
-
   // CIRCLE MENU
   menuCircle = new MenuCircle;
   //ACTIVE POSITION ---------   LISSAGE DES VALEURS DE POSITION.JS
@@ -150,32 +147,37 @@ function draw() {
 
   // noLoop()
   if (mouseIsPressed) {
-    // console.log(boxes.bodies.length);
-    console.log("boxes: "+boxes.bodies.length+" points "+activePosition.length);
-    for (let index = 0; index < boxes.bodies.length; index++) {
-      boxes.bodies[index].isSleeping = true;
+    // boxes.bodies[0].vertices[1].x += 10.2;
+    // boxes.bodies[0].vertices[1].y -= 10.2;
+    // Body.setVertices(boxes.bodies[0], boxes.bodies[0].vertices);
+    // Body.translate( boxes.bodies[0], { x: 20, y: 20 });
 
-    }
+    // boxes.bodies[0].isSleeping = true;
+    // console.log(boxes.bodies.length);
+    // console.log("boxes: " + boxes.bodies.length + " points " + activePosition.length);
+    // for (let index = 0; index < boxes.bodies.length; index++) {
+    //   boxes.bodies[index].isSleeping = true;
+    // Body.translate( boxes.bodies[index], { x: 20, y: 20 });
+    // }
+
+    // console.log( boxes.bodies[0].position);
+    if (amount > 0 ) {amount+=step;}
+    const v3 = activePosition[0].calculVector(width-boxes.bodies[0].position.x,boxes.bodies[0].position.y,amount);
+    // ellipse( width-v3.x, v3.y, 10)
+    // const v3 = activePosition[0].calculVector(width-mouseX,mouseY,amount);
+    // Body.translate( boxes.bodies[0], { x: width-v3.x, y: v3.y });
+    Body.setPosition( boxes.bodies[0], { x: width-v3.x, y: v3.y });
+    // console.log(amount.toFixed(1),"  ", v3.x.toFixed(0),);
     // console.log(boxes.bodies[0].mass)
+  }else {
+    // boxes.bodies[0].vertices[1].x =0;
+    // boxes.bodies[0].vertices[1].y =0;
+    // Body.setVertices(boxes.bodies[0], boxes.bodies[0].vertices);
+    // console.log(  boxes.bodies[0].vertices[1].x);
   }
 }
 
-function resolveAfter2Seconds(x) {
-  return new Promise(resolve => {
-    // setTimeout(() => {
-    //   // resolve(x);
-    //   Engine.run(engine);
-    // }, 5000);
-    const interval = setInterval(() => {
-      if (smoother.smoothDamp()!=undefined) {
-        resolve('foo');
-        clearInterval(interval);
-      };
-    }, 1000);
-  });
-}
-
-async function waitToRun() {
-  var x = await resolveAfter2Seconds();
-  Engine.run(engine)
+function mouseClicked() {
+  amount=1;
+  // console.log("object");
 }

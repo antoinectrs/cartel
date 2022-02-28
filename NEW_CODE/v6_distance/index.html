@@ -19,16 +19,33 @@
       padding: 0;
       margin: 0;
     }
-    canvas{
-      transform: scale(-1,1);
+
+    canvas {
+      transform: scale(-1, 1);
       /* filter: blur(9px)contrast(107.5)saturate(4068%); */
       /* filter: blur(3px)contrast(107.5)saturate(4068%); */
       /* filter:blur(3px)contrast(0.5)saturate(4068%); */
     }
   </style>
 </head>
+<script>
+  function resolveAfter2Seconds(x) {
+    return new Promise(resolve => {
+      const interval = setInterval(() => {
+        if (smoother.smoothDamp() != undefined) {
+          resolve('foo');
+          clearInterval(interval);
+        };
+      }, 500);
+    });
+  }
+  async function waitToRun() {
+    var x = await resolveAfter2Seconds();
+    Engine.run(engine)
+  }
+</script>
 
-<body >
+<body>
 </body>
 
 </html>

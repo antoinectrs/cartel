@@ -47,11 +47,11 @@ class MenuCircle {
         // this.drawAxis();
         pop();
     }
- 
+
     drawAxis() {
         stroke(255, 0, 0);
         line(0, 0, 20, 0);
         stroke(0, 255, 0);
         line(0, 0, 0, 20);
-      }
+    }
 }

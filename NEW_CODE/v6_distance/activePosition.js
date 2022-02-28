@@ -13,13 +13,13 @@ class ActivePosition{
             this.touch=true;
         }
     }
-
-    // checkDistance(x,y,threshold){
-    //     for (let index = 0; index <  this.position[this.level].length; index++) {
-    //        if( dist(x, y, this.position[this.level][index].x, this.position[this.level][index].y)<threshold){
-    //         this.touch=true;
-    //         //    ellipse(this.position[this.level][index].x, this.position[this.level][index].y, threshold);
-    //        }
-    //     }
-    // }
+    calculVector(x,y,amount){
+        // const v0 = createVector(this.position.x, this.position.y);
+       
+        const v0 = createVector(mouseX,mouseY);
+        const v1 = createVector(x,y);
+        // const v1 = createVector(200, 200);
+        line(width-v0.x, v0.y, width-v1.x, v1.y);
+        return p5.Vector.lerp(v0, v1, amount);
+      }
 }
