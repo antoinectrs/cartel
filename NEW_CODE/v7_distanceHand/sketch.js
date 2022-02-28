@@ -1,9 +1,5 @@
-// Benedikt Groß
-// Example for matter-attractors an attractors plugin for matter.js
 // https://github.com/liabru/matter-attractors
-
 Matter.use('matter-attractors');
-
 const Engine = Matter.Engine;
 const Render = Matter.Render;
 const World = Matter.World;
@@ -12,10 +8,9 @@ const Body = Matter.Body;
 const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 const Composites = Matter.Composites;
-
 const drawBody = Helpers.drawBody;
 const drawBodies = Helpers.drawBodies;
-let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle, amount, step, self;
+let video,engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle, amount, step, self,level;
 let activePosition = [];
 const skeleton = new Skeleton()
 const smoother = new MediaPipeSmoothPose({
@@ -24,7 +19,6 @@ const smoother = new MediaPipeSmoothPose({
 });
 const mediaPipe = new MediaPipeClient()
 window.mediaPipe = mediaPipe;
-let video;
 
 function preload() {
   self = loadFont('../libraries/self.otf');
@@ -47,7 +41,6 @@ function setup() {
   //------  VIDEO  ------
   // create an engine
   engine = Engine.create();
-  // no gravity
   engine.world.gravity.scale = 0;
   attractor = Bodies.circle(400, 400, 150, {
     isStatic: true,
@@ -79,7 +72,7 @@ function setup() {
     });
   });
   World.add(engine.world, boxes);
-  // run the engine
+  // async wait seb to run the physic engine
   waitToRun();
   // CIRCLE MENU
   menuCircle = new MenuCircle;
