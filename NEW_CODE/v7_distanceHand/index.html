@@ -1,0 +1,52 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://www.unpkg.com/@ecal-mid/mediapipe@latest/umd/css/index.css" />
+  <script src="https://unpkg.com/@ecal-mid/mediapipe@latest"></script>
+  <script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="../libraries/matter.js"></script>
+  <script language="javascript" type="text/javascript" src="../libraries/matter-attractors.js"></script>
+  <script language="javascript" type="text/javascript" src="../libraries/helpers.js"></script>
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="text.js"></script>
+  <script language="javascript" type="text/javascript" src="position.js"></script>
+  <script language="javascript" type="text/javascript" src="menuCircle.js"></script>
+  <script language="javascript" type="text/javascript" src="activePosition.js"></script>
+  <script language="javascript" type="text/javascript" src="letter.js"></script>
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas {
+      transform: scale(-1, 1);
+      /* filter: blur(9px)contrast(107.5)saturate(4068%); */
+      /* filter: blur(3px)contrast(107.5)saturate(4068%); */
+      /* filter:blur(3px)contrast(0.5)saturate(4068%); */
+    }
+  </style>
+</head>
+<script>
+  function resolveAfter2Seconds(x) {
+    return new Promise(resolve => {
+      const interval = setInterval(() => {
+        if (smoother.smoothDamp() != undefined) {
+          resolve('foo');
+          clearInterval(interval);
+        };
+      }, 500);
+    });
+  }
+  async function waitToRun() {
+    var x = await resolveAfter2Seconds();
+    Engine.run(engine)
+  }
+</script>
+
+<body>
+</body>
+
+</html>
