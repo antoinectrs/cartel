@@ -127,10 +127,10 @@ function draw() {
   }
   pop();
   //------ END BODY DETECTION -------
+  //------ PHYSIC LETTERS -------
   stroke(0);
   strokeWeight(1);
   // fill(0);
-  //------ PHYSIC LETTERS -------
   // for (let index = 0; index < boxes.bodies.length; index++) {
   for (let index = 0; index < activePosition.length; index++) {
     textSize(20);
@@ -151,19 +151,17 @@ function draw() {
   // drawBody(wallBottom);
   //------ END PHYSIC LETTERS -------
 
-
   // noLoop()
   if (mouseIsPressed) {
     if (amount >= 0) { amount += step; }
     for (let index = 0; index < position[0].length; index++) {
-      // if (activePosition[index].touch == false) {
-      //   activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height, 100);
-      // }
-      // activePosition[index].showActualPoint();
-      const v3 = activePosition[index].calculVector(width - boxes.bodies[index].position.x, boxes.bodies[index].position.y, amount);
-      Body.setPosition(boxes.bodies[index], { x: width - v3.x, y: v3.y });
-      Body.setAngle(boxes.bodies[index], 0);
-      // console.log(boxes.bodies[0].mass)
+      if (activePosition[index].touch == true) {
+           // activePosition[index].showActualPoint();
+           const v3 = activePosition[index].calculVector( boxes.bodies[index].position.x, boxes.bodies[index].position.y, amount);
+           Body.setPosition(boxes.bodies[index], { x:  v3.x, y: v3.y });
+           Body.setAngle(boxes.bodies[index], 0);
+           // console.log(boxes.bodies[0].mass)
+      }
     }
   }
 }
