@@ -68,7 +68,7 @@ function setup() {
   // xx, yy, columns, rows, columnGap, rowGap
   boxes = Composites.stack(width / 2, 0, 3, 40, 3, 3, function (x, y) {
     return Bodies.circle(x, y, 10, {
-      mass: 1,
+      // mass: 1,
     });
   });
   World.add(engine.world, boxes);
@@ -80,8 +80,7 @@ function setup() {
   for (let index = 0; index < position[0].length; index++) {
     activePosition.push(new ActivePosition());
     activePosition[index].setUpPosition(index,0);
-    activePosition[index].setUpLetter(letterSplit[index]);
-      // new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify, letterSplit[index]));
+    activePosition[index].setUpLetter(letterSplit[0][index]);
   }
 }
 function draw() {
