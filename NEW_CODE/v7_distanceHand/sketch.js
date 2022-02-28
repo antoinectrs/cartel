@@ -75,7 +75,7 @@ function setup() {
   // xx, yy, columns, rows, columnGap, rowGap
   boxes = Composites.stack(width / 2, 0, 3, 40, 3, 3, function (x, y) {
     return Bodies.circle(x, y, 10, {
-      mass: 2,
+      mass: 1,
     });
   });
   // VECTOR SET UP
@@ -97,7 +97,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(255,180);
   push();
   // image(video, 0, 0)
   //------ BODY DETECTION -------
