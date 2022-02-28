@@ -15,7 +15,7 @@ const Composites = Matter.Composites;
 
 const drawBody = Helpers.drawBody;
 const drawBodies = Helpers.drawBodies;
-let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle,amount,step,self;
+let engine, attractor, wallBottom, wallLeft, wallTop, wallRight, boxes, menuCircle, amount, step, self;
 let activePosition = [];
 const skeleton = new Skeleton()
 const smoother = new MediaPipeSmoothPose({
@@ -78,10 +78,6 @@ function setup() {
       mass: 1,
     });
   });
-  // VECTOR SET UP
-  step = -0.01;
-  amount=1;
-
   World.add(engine.world, boxes);
   // run the engine
   waitToRun();
@@ -91,13 +87,11 @@ function setup() {
   const simplify = 5;
   for (let index = 0; index < position[0].length; index++) {
     activePosition.push(
-      new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify,letterSplit[index]));
+      new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify, letterSplit[index]));
   }
-  
 }
-
 function draw() {
-  background(255,180);
+  background(255, 180);
   push();
   // image(video, 0, 0)
   //------ BODY DETECTION -------
@@ -116,6 +110,11 @@ function draw() {
     for (let index = 0; index < position[0].length; index++) {
       if (activePosition[index].touch == false) {
         activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height, 100);
+      } else {
+        const v3 = activePosition[index].calculVector(boxes.bodies[index].position.x, boxes.bodies[index].position.y, activePosition[index].activeCount());
+        Body.setPosition(boxes.bodies[index], { x: v3.x, y: v3.y });
+        Body.setAngle(boxes.bodies[index], 0);
+        // console.log(boxes.bodies[0].mass)
       }
       activePosition[index].showActualPoint();
     }
@@ -153,20 +152,20 @@ function draw() {
 
   // noLoop()
   if (mouseIsPressed) {
-    if (amount >= 0) { amount += step; }
-    for (let index = 0; index < position[0].length; index++) {
-      if (activePosition[index].touch == true) {
-           // activePosition[index].showActualPoint();
-           const v3 = activePosition[index].calculVector( boxes.bodies[index].position.x, boxes.bodies[index].position.y, amount);
-           Body.setPosition(boxes.bodies[index], { x:  v3.x, y: v3.y });
-           Body.setAngle(boxes.bodies[index], 0);
-           // console.log(boxes.bodies[0].mass)
-      }
-    }
+    // if (amount >= 0) { amount += step; }
+    // for (let index = 0; index < position[0].length; index++) {
+    //   if (activePosition[index].touch == true) {
+    //        // activePosition[index].showActualPoint();
+    //        const v3 = activePosition[index].calculVector( boxes.bodies[index].position.x, boxes.bodies[index].position.y, amount);
+    //        Body.setPosition(boxes.bodies[index], { x:  v3.x, y: v3.y });
+    //        Body.setAngle(boxes.bodies[index], 0);
+    //        // console.log(boxes.bodies[0].mass)
+    //   }
+    // }
   }
 }
 
 function mouseClicked() {
-  amount=1;
+  amount = 1;
   // console.log("object");
 }

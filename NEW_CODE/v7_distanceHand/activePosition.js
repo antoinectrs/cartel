@@ -3,6 +3,8 @@ class ActivePosition{
         this.position = {x,y};
         this.touch= false;
         this.letter= lett;
+        this.amount=1;
+        this.step = -0.01;
     }
     showActualPoint(){
             if( this.touch==true){
@@ -20,4 +22,10 @@ class ActivePosition{
         // line(width-v0.x, v0.y, width-v1.x, v1.y);
         return p5.Vector.lerp(v0, v1, amount);
       }
+    activeCount(){
+        if (this.amount >= 0) {
+            this.amount += this.step; 
+            return this.amount;
+        }
+    }
 }
