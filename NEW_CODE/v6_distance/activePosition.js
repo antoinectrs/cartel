@@ -1,7 +1,8 @@
 class ActivePosition{
-    constructor(x,y){
+    constructor(x,y,lett){
         this.position = {x,y};
         this.touch= false;
+        this.letter= lett;
     }
     showActualPoint(){
             if( this.touch==true){

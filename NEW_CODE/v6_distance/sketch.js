@@ -87,8 +87,10 @@ function setup() {
   //ACTIVE POSITION ---------   LISSAGE DES VALEURS DE POSITION.JS
   const simplify = 5;
   for (let index = 0; index < position[0].length; index++) {
-    activePosition.push(new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify));
+    activePosition.push(
+      new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify,letterSplit[index]));
   }
+  
 }
 
 function draw() {
@@ -126,14 +128,16 @@ function draw() {
   strokeWeight(1);
   // fill(0);
   //------ PHYSIC LETTERS -------
-  for (let index = 0; index < boxes.bodies.length; index++) {
+  // for (let index = 0; index < boxes.bodies.length; index++) {
+  for (let index = 0; index < activePosition.length; index++) {
     textSize(20);
     push();
     translate(boxes.bodies[index].position.x, boxes.bodies[index].position.y);
     // console.log(boxes.bodies[index].angle);
     rotate(boxes.bodies[index].angle)
     scale(-1, 1)
-    text('a', -6, 0);
+    // text('a', -6, 0);
+    text(activePosition[index].letter, -6, 0);
     pop();
   }
   // drawBodies(boxes.bodies);
