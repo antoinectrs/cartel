@@ -24,6 +24,7 @@ function preload() {
   self = loadFont('../libraries/self.otf');
 }
 function setup() {
+  level=0;
   pixelDensity(1);
   textFont(self);
   angleMode(RADIANS);
@@ -79,9 +80,10 @@ function setup() {
   //ACTIVE POSITION ---------   LISSAGE DES VALEURS DE POSITION.JS
   for (let index = 0; index < position[0].length; index++) {
     activePosition.push(new ActivePosition());
-    activePosition[index].setUpPosition(index,0);
-    activePosition[index].setUpLetter(letterSplit[0][index]);
+    activePosition[index].setUpPosition(index,level);
+    activePosition[index].setUpLetter(letterSplit[level][index]);
   }
+  
 }
 function draw() {
   background(255, 180);
@@ -100,7 +102,7 @@ function draw() {
     menuCircle.positionMove(pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height);
     menuCircle.show();
     //------ CHECK DISTANCE TO POINT -------
-    for (let index = 0; index < position[0].length; index++) {
+    for (let index = 0; index < position[level].length; index++) {
       if (activePosition[index].touch == false) {
         activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height, 100);
       } else {
