@@ -147,33 +147,17 @@ function draw() {
 
   // noLoop()
   if (mouseIsPressed) {
-    // boxes.bodies[0].vertices[1].x += 10.2;
-    // boxes.bodies[0].vertices[1].y -= 10.2;
-    // Body.setVertices(boxes.bodies[0], boxes.bodies[0].vertices);
-    // Body.translate( boxes.bodies[0], { x: 20, y: 20 });
-
-    // boxes.bodies[0].isSleeping = true;
-    // console.log(boxes.bodies.length);
-    // console.log("boxes: " + boxes.bodies.length + " points " + activePosition.length);
-    // for (let index = 0; index < boxes.bodies.length; index++) {
-    //   boxes.bodies[index].isSleeping = true;
-    // Body.translate( boxes.bodies[index], { x: 20, y: 20 });
-    // }
-
-    // console.log( boxes.bodies[0].position);
-    if (amount > 0 ) {amount+=step;}
-    const v3 = activePosition[0].calculVector(width-boxes.bodies[0].position.x,boxes.bodies[0].position.y,amount);
-    // ellipse( width-v3.x, v3.y, 10)
-    // const v3 = activePosition[0].calculVector(width-mouseX,mouseY,amount);
-    // Body.translate( boxes.bodies[0], { x: width-v3.x, y: v3.y });
-    Body.setPosition( boxes.bodies[0], { x: width-v3.x, y: v3.y });
-    // console.log(amount.toFixed(1),"  ", v3.x.toFixed(0),);
-    // console.log(boxes.bodies[0].mass)
-  }else {
-    // boxes.bodies[0].vertices[1].x =0;
-    // boxes.bodies[0].vertices[1].y =0;
-    // Body.setVertices(boxes.bodies[0], boxes.bodies[0].vertices);
-    // console.log(  boxes.bodies[0].vertices[1].x);
+    if (amount >= 0) { amount += step; }
+    for (let index = 0; index < position[0].length; index++) {
+      // if (activePosition[index].touch == false) {
+      //   activePosition[index].checkDistance(activePosition[index].position.x, activePosition[index].position.y, pose.RIGHT_INDEX.x * width, pose.RIGHT_INDEX.y * height, 100);
+      // }
+      // activePosition[index].showActualPoint();
+      const v3 = activePosition[index].calculVector(width - boxes.bodies[index].position.x, boxes.bodies[index].position.y, amount);
+      Body.setPosition(boxes.bodies[index], { x: width - v3.x, y: v3.y });
+      Body.setAngle(boxes.bodies[index], 0);
+      // console.log(boxes.bodies[0].mass)
+    }
   }
 }
 

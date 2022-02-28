@@ -14,11 +14,9 @@ class ActivePosition{
         }
     }
     calculVector(x,y,amount){
-        // const v0 = createVector(this.position.x, this.position.y);
-       
-        const v0 = createVector(mouseX,mouseY);
+        const v0 = createVector(this.position.x, this.position.y);
+        // const v0 = createVector(mouseX,mouseY);
         const v1 = createVector(x,y);
-        // const v1 = createVector(200, 200);
         line(width-v0.x, v0.y, width-v1.x, v1.y);
         return p5.Vector.lerp(v0, v1, amount);
       }
