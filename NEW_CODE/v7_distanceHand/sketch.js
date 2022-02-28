@@ -84,10 +84,11 @@ function setup() {
   // CIRCLE MENU
   menuCircle = new MenuCircle;
   //ACTIVE POSITION ---------   LISSAGE DES VALEURS DE POSITION.JS
-  const simplify = 5;
   for (let index = 0; index < position[0].length; index++) {
-    activePosition.push(
-      new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify, letterSplit[index]));
+    activePosition.push(new ActivePosition());
+    activePosition[index].setUpPosition(index,0);
+    activePosition[index].setUpLetter(letterSplit[index]);
+      // new ActivePosition(Math.ceil(position[0][index].x / simplify) * simplify, Math.ceil(position[0][index].y / simplify) * simplify, letterSplit[index]));
   }
 }
 function draw() {
